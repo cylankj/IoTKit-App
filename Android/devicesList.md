@@ -61,7 +61,9 @@ void OnRobotGetDataRsp(long seq, String identity, ArrayList<ArrayList<JFGDPMsg>>
              JFGDPMsg dp = dpList.get(j);
              switch (dp.id) {
                  case 201: // net info IntAndString;
-                 if (dp.packValue == null || dp.packValue.length == 0) break;                 MessagePack msgpack = new MessagePack();                 try {
+                 if (dp.packValue == null || dp.packValue.length == 0) break;
+                 MessagePack msgpack = new MessagePack();  
+             try {
                  IntAndString values = msgpack.read(dp.packValue, IntAndString.class);
                  SLog.i("intValue:" + values.intValue + " , strValue:" + values.strValue);
                  // baseValue
@@ -79,4 +81,5 @@ void OnRobotGetDataRsp(long seq, String identity, ArrayList<ArrayList<JFGDPMsg>>
  }
 
 ```
+
 

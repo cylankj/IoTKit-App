@@ -4,7 +4,7 @@
 2.在企业信息中接入贵司的应用。
 
 3.在android Manifests 中填入vid,和vkey。注意程序包名要与在平台中注册的一样。
-![vid/vkey](/assets/vid.png)
+![](assets/vid.png)
 
 4.加载静态库。
 
