@@ -1,7 +1,7 @@
 # 开始工作
 1.首先到 http://test.robotscloud.com/ 官网注册贵司账号。
 
-2.在企业信息中接入贵司的应用。
+2.在企业信息中接入贵司的应用,注意安装包的签名必须要填上，即使是debug包也要，需要包含':'。如果没有签名，SDK会崩溃。
 
 3.在android Manifests 中填入vid,和vkey。注意程序包名要与在平台中注册的一样。
 ![](assets/vid.png)
