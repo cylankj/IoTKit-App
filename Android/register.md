@@ -7,7 +7,7 @@
 （1） 首先需要获取到短信验证码。
 
 ```java
-JfgAppCmd.getInstance().sendCheckCode(phoneNumber, "cylan");  
+  JfgAppCmd.getInstance().sendCheckCode(account, JfgEnum.JFG_SMS_REGISTER);
 ```
 
  然后短信验证码的发送情况在此回调中.判断error是否为0.和token是否为空.
