@@ -20,7 +20,6 @@
  JfgAppCmd.getInstance().verifySMS(account, code, token);
 ```
 
-
  在OnResult中判断resultType为 JfgEvent.ResultEvent.JFG_RESULT_VERIFY_SMS。接着判断resultCode为0即为验证码有效。
 
 ```java
