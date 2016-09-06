@@ -5,16 +5,18 @@
 1.标准账号
 
 ```java
-  JfgAppCmd.getInstance().login(userName, pwd);
+  JfgAppCmd.getInstance().login(String userName, String pwd);
+```
+
+
+2.第三方登录接口
+
+```java
+  JfgAppCmd.getInstance().openLogin(String openId,String token);
 ```
 
 登陆的回调结果,判断resultType为JfgEvent.ResultEvent.JFG_RESULT_LOGIN，接着判读resultCode为0即为成功。
 
 ```java
  public void OnResult(int resultType, int resultCode);
-```
-
-2.第三方登录接口
-```java
-JfgAppCmd.getInstance().openLogin( String openId,  String token);
 ```
