@@ -1,0 +1,23 @@
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+/JFGLibrary/
+将删除 .gitignore
+将删除 .idea/
+将删除 JFGLibrary
+将删除 app/
+将删除 build.gradle
+将删除 gradle.properties
+将删除 gradle/
+将删除 gradlew
+将删除 gradlew.bat
+将删除 settings.gradle
+/app/libs/armeabi-v7a/libjfgsdk.so
+/app/libs/armeabi-v7a/libsqlcipher.so
+/app/build/
+/.idea/
