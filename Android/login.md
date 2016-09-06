@@ -14,4 +14,7 @@
  public void OnResult(int resultType, int resultCode);
 ```
 
-2.第三方登录接口暂时未实现，敬请期待。
+2.第三方登录接口
+```java
+JfgAppCmd.getInstance().openLogin( String openId,  String token);
+```
