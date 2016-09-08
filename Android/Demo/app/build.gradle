@@ -81,15 +81,12 @@ dependencies {
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:design:23.2.1'
     // 以下两种形式均为引用库。我司可以直接引用本地库。贵司只能使用aar包。
-
-    // -----------------------------------------------------------
-    //注释这段代码。
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
     String oem = properties.getProperty('oem')
     if (oem.equals("cylan")) {
-        compile project(':JFGLibrary') //直接引用项目,贵司需要注释掉此代码。
+        compile project(':JFGLibrary') //直接引用项目
     } else {
-        compile(name:'JfgAndroidSDK-3.0.111',ext:'aar')  //引用aar包，需要打开此代码。
+        compile(name: 'JfgAndroidSDK-3.0.114', ext: 'aar')  //引用aar包 , 注意版本号的更新。
     }
 }

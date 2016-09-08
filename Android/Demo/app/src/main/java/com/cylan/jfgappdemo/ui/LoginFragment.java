@@ -81,8 +81,8 @@ public class LoginFragment extends BaseFragment {
                 String userName = binding.etUserName.getText().toString().trim();
                 Toast.makeText(getContext(), "login: " + userName, Toast.LENGTH_SHORT).show();
                 SLog.i("name:%s,pwd:%s", userName, pwd);
-                JfgAppCmd.getInstance().login(userName, pwd);
-//                JfgAppCmd.getInstance().openLogin("testOpenLogin", "http://yf.cylan.com.cn");
+//                JfgAppCmd.getInstance().login(userName, pwd);
+                JfgAppCmd.getInstance().openLogin("testOpenLogin", "http://yf.cylan.com.cn");
             }
         });
         binding.tvRegister.setOnClickListener(new View.OnClickListener() {

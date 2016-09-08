@@ -197,55 +197,51 @@ public class AppDemoCallBack implements AppCallBack {
 
     @Override
     public void OnGetFriendListRsp(int ret, ArrayList<JFGFriendAccount> list) {
-        SLog.d("");
         EventBus.getDefault().post(list);
     }
 
     @Override
     public void OnGetFriendRequestListRsp(int ret, ArrayList<JFGFriendRequest> list) {
-        SLog.d("");
         EventBus.getDefault().post(list);
     }
 
     @Override
     public void OnGetFriendInfoRsp(int ret, JFGFriendAccount friendAccount) {
-        SLog.d("");
         EventBus.getDefault().post(friendAccount);
     }
 
     @Override
     public void OnCheckFriendAccountRsp(int ret, String targetAccount, String alias, boolean isFriend) {
-        SLog.d("");
+
     }
 
     @Override
     public void OnShareDeviceRsp(int ret, String cid, String account) {
-        SLog.d("");
+
     }
 
     @Override
     public void OnUnShareDeviceRsp(int ret, String cid, String account) {
-        SLog.d("");
+
     }
 
     @Override
     public void OnGetShareListRsp(int ret, ArrayList<JFGShareListInfo> list) {
-        SLog.d("");
+
     }
 
     @Override
     public void OnGetUnShareListByCidRsp(int ret, ArrayList<JFGFriendAccount> list) {
-        SLog.d("");
+
     }
 
     @Override
     public void OnUpdateNTP(long unixTimestamp) {
-        SLog.e("unixTimestamp : " + unixTimestamp + " --- " + JfgUtils.DetailedDateFormat.format(unixTimestamp * 1000));
-        SLog.e("unixTimestamp : now " + System.currentTimeMillis());
+        SLog.i("unixTimestamp : " + JfgUtils.DetailedDateFormat.format(unixTimestamp * 1000));
     }
 
     @Override
     public void OnEfamilyMsg(byte[] bytes) {
-        SLog.d("");
+
     }
 }

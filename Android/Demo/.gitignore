@@ -17,8 +17,10 @@
 将删除 gradlew
 将删除 gradlew.bat
 将删除 settings.gradle
-/app/libs/armeabi-v7a/libjfgsdk.so
+
 /app/build/
 /.idea/
-
-/settings.gradle
+JFGLibrary
+settings.gradle
+/gradle/
+/build/
