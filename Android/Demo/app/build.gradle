@@ -89,9 +89,7 @@ dependencies {
     String oem = properties.getProperty('oem')
     if (oem.equals("cylan")) {
         compile project(':JFGLibrary') //直接引用项目,贵司需要注释掉此代码。
+    } else {
+        compile(name:'JfgAndroidSDK-3.0.111',ext:'aar')  //引用aar包，需要打开此代码。
     }
-    // -----------------------------------------------------------
-
-    //compile(name:'JfgAndroidSDK-3.0.111',ext:'aar')  //引用aar包，需要打开此代码。
-
 }
