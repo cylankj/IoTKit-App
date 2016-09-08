@@ -240,6 +240,12 @@ public class AppDemoCallBack implements AppCallBack {
 
     @Override
     public void OnUpdateNTP(long unixTimestamp) {
-        SLog.i("unixTimestamp : " + JfgUtils.DetailedDateFormat.format(unixTimestamp * 1000));
+        SLog.e("unixTimestamp : " + unixTimestamp + " --- " + JfgUtils.DetailedDateFormat.format(unixTimestamp * 1000));
+        SLog.e("unixTimestamp : now " + System.currentTimeMillis());
+    }
+
+    @Override
+    public void OnEfamilyMsg(byte[] bytes) {
+        SLog.d("");
     }
 }
