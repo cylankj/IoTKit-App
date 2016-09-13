@@ -2,6 +2,7 @@ package com.cylan.jfgappdemo.ui;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,10 +11,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.cylan.constants.JfgConstants;
+import com.cylan.entity.jniCall.JFGResult;
 import com.cylan.jfgapp.jni.JfgAppCmd;
 import com.cylan.jfgappdemo.JfgEvent;
 import com.cylan.jfgappdemo.R;
 import com.cylan.jfgappdemo.databinding.FragmentLoginBinding;
+import com.cylan.utils.JfgUtils;
 import com.superlog.SLog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -81,8 +84,8 @@ public class LoginFragment extends BaseFragment {
                 String userName = binding.etUserName.getText().toString().trim();
                 Toast.makeText(getContext(), "login: " + userName, Toast.LENGTH_SHORT).show();
                 SLog.i("name:%s,pwd:%s", userName, pwd);
-//                JfgAppCmd.getInstance().login(userName, pwd);
-                JfgAppCmd.getInstance().openLogin("testOpenLogin", "http://yf.cylan.com.cn");
+                JfgAppCmd.getInstance().login(userName, pwd);
+//                JfgAppCmd.getInstance().openLogin("testOpenLogin", "http://yf.cylan.com.cn");
             }
         });
         binding.tvRegister.setOnClickListener(new View.OnClickListener() {
@@ -101,21 +104,21 @@ public class LoginFragment extends BaseFragment {
     /**
      * On result.
      *
-     * @param resultEvent the result event
+     * @param result the result event
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onResult(JfgEvent.ResultEvent resultEvent) {
-        if (resultEvent.event == JfgEvent.ResultEvent.JFG_RESULT_LOGIN) {
-            Toast.makeText(getContext(), "login result: " + resultEvent.code, Toast.LENGTH_SHORT).show();
-            SLog.i("login result: " + resultEvent.code);
-            if (resultEvent.code == JfgConstants.RESULT_OK) {
+    public void onResult(JFGResult result) {
+        if (result.event == JfgEvent.ResultEvent.JFG_RESULT_LOGIN) {
+            Toast.makeText(getContext(), "login result: " + result.code, Toast.LENGTH_SHORT).show();
+            SLog.i("login result: " + result.code);
+            if (result.code == JfgConstants.RESULT_OK) {
                 // login succeed show dev fragment
                 DevListFragment fragment = DevListFragment.getInstance(null);
                 getActivity().getSupportFragmentManager()
                         .beginTransaction().replace(R.id.fl_container, fragment).commit();
             }
-        } else if (resultEvent.event == JfgEvent.ResultEvent.JFG_RESULT_REGISTER) {
-            Toast.makeText(getContext(), "register: " + resultEvent.code, Toast.LENGTH_SHORT).show();
+        } else if (result.event == JfgEvent.ResultEvent.JFG_RESULT_REGISTER) {
+            Toast.makeText(getContext(), "register: " + result.code, Toast.LENGTH_SHORT).show();
         }
     }
 

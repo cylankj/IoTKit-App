@@ -32,7 +32,6 @@ import org.msgpack.MessagePack;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 消息记录页面。

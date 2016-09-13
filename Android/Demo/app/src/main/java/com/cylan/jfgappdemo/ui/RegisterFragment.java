@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 
 import com.cylan.entity.JfgEnum;
+import com.cylan.entity.jniCall.JFGResult;
 import com.cylan.jfgapp.jni.JfgAppCmd;
 import com.cylan.jfgappdemo.JfgEvent;
 import com.cylan.jfgappdemo.R;
@@ -132,22 +133,22 @@ public class RegisterFragment extends Fragment {
     /**
      * On result.
      *
-     * @param resultEvent the result event
+     * @param result the result event
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onResult(JfgEvent.ResultEvent resultEvent) {
-        if (resultEvent.event == JfgEvent.ResultEvent.JFG_RESULT_REGISTER) {
-            Toast.makeText(getContext(), "register result: " + resultEvent.code, Toast.LENGTH_SHORT).show();
-            SLog.i("register result: " + resultEvent.code);
-            if (resultEvent.code == 0) {
+    public void onResult(JFGResult result) {
+        if (result.event == JfgEvent.ResultEvent.JFG_RESULT_REGISTER) {
+            Toast.makeText(getContext(), "register result: " + result.code, Toast.LENGTH_SHORT).show();
+            SLog.i("register result: " + result.code);
+            if (result.code == 0) {
                 // register ok ! show login fragment .
                 LoginFragment fragment = LoginFragment.getInstance(null);
                 getActivity().getSupportFragmentManager()
                         .beginTransaction().replace(R.id.fl_container, fragment).commit();
             }
-        } else if (resultEvent.event == JfgEvent.ResultEvent.JFG_RESULT_VERIFY_SMS) {
-            Toast.makeText(getContext(), "get sms result: " + resultEvent.code, Toast.LENGTH_SHORT).show();
-            SLog.i("verify sms code result : " + resultEvent.code);
+        } else if (result.event == JfgEvent.ResultEvent.JFG_RESULT_VERIFY_SMS) {
+            Toast.makeText(getContext(), "get sms result: " + result.code, Toast.LENGTH_SHORT).show();
+            SLog.i("verify sms code result : " + result.code);
             JfgAppCmd.getInstance().
                     register(account, pwd, JfgEvent.REGISTER_TYPE_PHONE, token);
 

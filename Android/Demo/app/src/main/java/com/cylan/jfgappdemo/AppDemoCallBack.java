@@ -8,15 +8,16 @@ import com.cylan.entity.jniCall.JFGDPMsgCount;
 import com.cylan.entity.jniCall.JFGDPMsgRet;
 import com.cylan.entity.jniCall.JFGDevice;
 import com.cylan.entity.jniCall.JFGDoorBellCaller;
+import com.cylan.entity.jniCall.JFGFeedbackInfo;
 import com.cylan.entity.jniCall.JFGFriendAccount;
 import com.cylan.entity.jniCall.JFGFriendRequest;
 import com.cylan.entity.jniCall.JFGHistoryVideo;
 import com.cylan.entity.jniCall.JFGHistoryVideoErrorInfo;
-import com.cylan.entity.jniCall.JFGMessageInfo;
 import com.cylan.entity.jniCall.JFGMsgHttpResult;
 import com.cylan.entity.jniCall.JFGMsgVideoDisconn;
 import com.cylan.entity.jniCall.JFGMsgVideoResolution;
 import com.cylan.entity.jniCall.JFGMsgVideoRtcp;
+import com.cylan.entity.jniCall.JFGResult;
 import com.cylan.entity.jniCall.JFGServerCfg;
 import com.cylan.entity.jniCall.JFGShareListInfo;
 import com.cylan.entity.jniCall.RobotMsg;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
  * 所有JFGSDK的回调都在此类中接收
  * demo中将收到的回调，通过EventBus进行分发。
  * 在需要接收的消息中注册EventBus事件即可。
- * <p/>
+ * <p>
  * Created by lxh on 16-7-7.
  */
 public class AppDemoCallBack implements AppCallBack {
@@ -74,11 +75,6 @@ public class AppDemoCallBack implements AppCallBack {
     public void OnUpdateHistoryErrorCode(JFGHistoryVideoErrorInfo info) {
         EventBus.getDefault().post(info);
         SLog.d("");
-    }
-
-    @Override
-    public void OnServerPushMessage(JFGMessageInfo info) {
-
     }
 
 
@@ -178,9 +174,9 @@ public class AppDemoCallBack implements AppCallBack {
     }
 
     @Override
-    public void OnResult(int resultType, int resultCode) {
+    public void OnResult(JFGResult result) {
         SLog.d("");
-        EventBus.getDefault().post(new JfgEvent.ResultEvent(resultType, resultCode));
+        EventBus.getDefault().post(result);
     }
 
     @Override
@@ -212,27 +208,27 @@ public class AppDemoCallBack implements AppCallBack {
 
     @Override
     public void OnCheckFriendAccountRsp(int ret, String targetAccount, String alias, boolean isFriend) {
-
+        SLog.d("");
     }
 
     @Override
     public void OnShareDeviceRsp(int ret, String cid, String account) {
-
+        SLog.d("");
     }
 
     @Override
     public void OnUnShareDeviceRsp(int ret, String cid, String account) {
-
+        SLog.d("");
     }
 
     @Override
     public void OnGetShareListRsp(int ret, ArrayList<JFGShareListInfo> list) {
-
+        SLog.d("");
     }
 
     @Override
     public void OnGetUnShareListByCidRsp(int ret, ArrayList<JFGFriendAccount> list) {
-
+        SLog.d("");
     }
 
     @Override
@@ -242,6 +238,21 @@ public class AppDemoCallBack implements AppCallBack {
 
     @Override
     public void OnEfamilyMsg(byte[] bytes) {
+        SLog.d("");
+    }
 
+    @Override
+    public void OnForgetPassByEmailRsp(int ret, String email) {
+        SLog.d("");
+    }
+
+    @Override
+    public void OnGetAliasByCidRsp(int ret, String alias) {
+        SLog.d("");
+    }
+
+    @Override
+    public void OnGetFeedbackRsp(int ret, ArrayList<JFGFeedbackInfo> list) {
+        SLog.d("");
     }
 }

@@ -15,6 +15,7 @@ import com.cylan.constants.JfgConstants;
 import com.cylan.entity.jniCall.JFGDPMsg;
 import com.cylan.entity.jniCall.JFGDevBaseValue;
 import com.cylan.entity.jniCall.JFGDevice;
+import com.cylan.entity.jniCall.JFGResult;
 import com.cylan.entity.jniCall.RobotoGetDataRsp;
 import com.cylan.jfgapp.jni.JfgAppCmd;
 import com.cylan.jfgappdemo.JFGAppliction;
@@ -204,7 +205,7 @@ public class DevListFragment extends BaseFragment {
             MessagePack pack = new MessagePack();
             pack.register(Object.class);
             IntAndString values = new MessagePack().read(dp.packValue, IntAndString.class);
-            SLog.i("intValue:" + values.intValue + " , strValue:" + values.strValue);
+            SLog.i("netType:" + values.intValue + " , netName:" + values.strValue);
             pack.unregister();
             // baseValue
             dev.base = new JFGDevBaseValue(); // 判断base 是否为空。
@@ -218,25 +219,25 @@ public class DevListFragment extends BaseFragment {
     /**
      * On result.
      *
-     * @param resultEvent the result event
+     * @param result the result event
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onResult(JfgEvent.ResultEvent resultEvent) {
-        switch (resultEvent.event) {
+    public void onResult(JFGResult result) {
+        switch (result.event) {
             case JfgEvent.ResultEvent.JFG_RESULT_LOGIN:
-                if (resultEvent.code == JfgConstants.RESULT_OK
+                if (result.code == JfgConstants.RESULT_OK
                         && JFGAppliction.bindModel && JFGAppliction.bindBean != null) {
                     sendBindDeviceMsg();
                 }
                 break;
             case JfgEvent.ResultEvent.JFG_RESULT_BINDDEV:
-                SLog.i("bind dev resutl: " + resultEvent.code);
-                Toast.makeText(getContext(), "bind dev result:" + resultEvent.code, Toast.LENGTH_SHORT).show();
+                SLog.i("bind dev resutl: " + result.code);
+                Toast.makeText(getContext(), "bind dev result:" + result.code, Toast.LENGTH_SHORT).show();
                 break;
             case JfgEvent.ResultEvent.JFG_RESULT_UNBINDDEV:
-                SLog.i("unbind dev resutl: " + resultEvent.code);
-                Toast.makeText(getContext(), "Ubind dev result:" + resultEvent.code, Toast.LENGTH_SHORT).show();
-                if (resultEvent.code != 0) {
+                SLog.i("unbind dev resutl: " + result.code);
+                Toast.makeText(getContext(), "Ubind dev result:" + result.code, Toast.LENGTH_SHORT).show();
+                if (result.code != 0) {
                     return;
                 }
                 int count = getFragmentManager().getBackStackEntryCount();

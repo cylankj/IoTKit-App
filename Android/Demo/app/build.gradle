@@ -87,6 +87,6 @@ dependencies {
     if (oem.equals("cylan")) {
         compile project(':JFGLibrary') //直接引用项目
     } else {
-        compile(name: 'JfgAndroidSDK-3.0.114', ext: 'aar')  //引用aar包 , 注意版本号的更新。
+        compile(name: 'JfgAndroidSDK-3.0.118', ext: 'aar')  //引用aar包 , 注意版本号的更新。
     }
 }

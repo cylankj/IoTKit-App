@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import com.cylan.constants.JfgConstants;
 import com.cylan.entity.jniCall.JFGDPMsg;
 import com.cylan.entity.jniCall.JFGDevice;
+import com.cylan.entity.jniCall.JFGResult;
 import com.cylan.entity.jniCall.RobotoGetDataRsp;
 import com.cylan.jfgapp.jni.JfgAppCmd;
 import com.cylan.jfgappdemo.JfgEvent;
@@ -129,9 +130,9 @@ public class SettingsFragment extends BaseFragment {
     }
 
     @Subscribe()
-    public void onResult(JfgEvent.ResultEvent resultEvent) {
-        if (resultEvent.event == JfgEvent.ResultEvent.JFG_RESULT_UNBINDDEV) {
-            if (resultEvent.code == JfgConstants.RESULT_OK) {
+    public void onResult(JFGResult result) {
+        if (result.event == JfgEvent.ResultEvent.JFG_RESULT_UNBINDDEV) {
+            if (result.code == JfgConstants.RESULT_OK) {
                 // unbind succeed finish this fragment and playfragment.
             }
         }

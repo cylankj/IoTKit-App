@@ -90,25 +90,25 @@ public class JfgEvent {
 
         //------------------------------------------------------------------------
 
-        /**
-         * The Code.
-         */
-        public int code;
-        /**
-         * The Event.
-         */
-        public int event;
+//        /**
+//         * The Code.
+//         */
+//        public int code;
+//        /**
+//         * The Event.
+//         */
+//        public int event;
 
-        /**
-         * Instantiates a new Result event.
-         *
-         * @param event the event
-         * @param code  the code
-         */
-        public ResultEvent(int event, int code) {
-            this.code = code;
-            this.event = event;
-        }
+//        /**
+//         * Instantiates a new Result event.
+//         *
+//         * @param event the event
+//         * @param code  the code
+//         */
+//        public ResultEvent(int event, int code) {
+//            this.code = code;
+//            this.event = event;
+//        }
     }
 
 

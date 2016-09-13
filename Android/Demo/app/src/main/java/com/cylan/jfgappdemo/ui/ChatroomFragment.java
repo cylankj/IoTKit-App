@@ -80,12 +80,13 @@ public class ChatroomFragment extends BaseFragment {
         if (TextUtils.isEmpty(str)) return;
         RobotMsg robotMsg = new RobotMsg();
         robotMsg.msg = str;
+        SLog.e(robotMsg.msg);
         robotMsg.sn = sn;
         robotMsg.isAck = binding.cbIsack.isChecked();
         robotMsg.targets.add(device.uuid);
         JfgAppCmd.getInstance().robotTransmitMsg(robotMsg);
         sn++;
-        sb.append("send: ").append(str).append("\n");
+        sb.append("send: ").append(robotMsg.msg).append("\n");
         binding.tvEchoMsg.setText(sb.toString());
         if (binding.cbClearText.isChecked()) {
             binding.etInput.getText().clear();
