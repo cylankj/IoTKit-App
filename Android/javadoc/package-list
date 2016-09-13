@@ -2,12 +2,8 @@ com.cylan.constants
 com.cylan.database
 com.cylan.entity
 com.cylan.entity.jniCall
-com.cylan.interfaces
 com.cylan.jfgapp.interfases
 com.cylan.jfgapp.jni
-com.cylan.jfgdev.entity
-com.cylan.jfgdev.interfases
-com.cylan.jfgdev.jni
 com.cylan.panorama
 com.cylan.panorama.animation
 com.cylan.panorama.controller
