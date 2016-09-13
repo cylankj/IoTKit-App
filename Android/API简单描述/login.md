@@ -15,8 +15,8 @@
   JfgAppCmd.getInstance().openLogin(String openId,String token);
 ```
 
-登陆的回调结果,判断resultType为JfgEvent.ResultEvent.JFG_RESULT_LOGIN，接着判读resultCode为0即为成功。
+登陆的回调结果,判断result event为JfgEvent.ResultEvent.JFG_RESULT_LOGIN，接着判断code为0即为成功。
 
 ```java
- public void OnResult(int resultType, int resultCode);
+ public void OnResult(JFGResult result);
 ```
