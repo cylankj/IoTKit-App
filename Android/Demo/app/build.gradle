@@ -93,6 +93,5 @@ dependencies {
                 name: file.name.lastIndexOf('.').with { it != -1 ? file.name[0..<it] : file.name }, 
                 ext: 'aar'
         ])}
-}
     }
 }
