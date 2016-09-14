@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/btn_commint_send"
                 android:layout_below="@+id/et_input"
-                android:text="Must Ack"
+                android:text="Ack"
                 android:textAllCaps="false" />
 
             <CheckBox
@@ -34,11 +34,21 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/btn_commint_send"
                 android:layout_below="@+id/et_input"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="8dp"
                 android:layout_toEndOf="@+id/cb_isack"
                 android:checked="true"
-                android:text="clear EditText"
+                android:text="Clear"
                 android:textAllCaps="false" />
+
+            <CheckBox
+                android:id="@+id/cb_test_hex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/btn_commint_send"
+                android:layout_below="@+id/et_input"
+                android:layout_marginStart="8dp"
+                android:text="HEX"
+                android:layout_toEndOf="@+id/cb_clear_text" />
 
             <Button
                 android:id="@+id/btn_commint_send"

@@ -15,11 +15,15 @@ import com.cylan.jfgapp.jni.JfgAppCmd;
 import com.cylan.jfgappdemo.JfgEvent;
 import com.cylan.jfgappdemo.R;
 import com.cylan.jfgappdemo.databinding.FragmentChatroomBinding;
+import com.cylan.jfgappdemo.datamodel.StringAndInt;
 import com.superlog.SLog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 /**
  * 消息透传界面。
@@ -76,20 +80,40 @@ public class ChatroomFragment extends BaseFragment {
     }
 
     private void sendMessage() {
-        String str = binding.etInput.getText().toString().trim();
-        if (TextUtils.isEmpty(str)) return;
-        RobotMsg robotMsg = new RobotMsg();
-        robotMsg.msg = str;
-        SLog.e(robotMsg.msg);
-        robotMsg.sn = sn;
-        robotMsg.isAck = binding.cbIsack.isChecked();
-        robotMsg.targets.add(device.uuid);
+        byte[] bytes = new byte[256];
+        if (binding.cbTestHex.isChecked()) {
+            for (int i = 0; i < 256; i++) {
+                bytes[i] = (byte) i;
+            }
+        } else {
+            String str = binding.etInput.getText().toString().trim();
+            if (TextUtils.isEmpty(str)) return;
+            bytes = str.getBytes();
+        }
+        ArrayList<String> list = new ArrayList<>();
+        list.add(device.uuid);
+        RobotMsg robotMsg = new RobotMsg(list, sn, binding.cbIsack.isChecked(), bytes);
         JfgAppCmd.getInstance().robotTransmitMsg(robotMsg);
         sn++;
-        sb.append("send: ").append(robotMsg.msg).append("\n");
+        sb.append("send: ").append(new String(robotMsg.bytes)).append("\n");
         binding.tvEchoMsg.setText(sb.toString());
         if (binding.cbClearText.isChecked()) {
             binding.etInput.getText().clear();
+        }
+    }
+
+    public static void main(String[] arrgs) {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < 256; i++) {
+            s.append(String.format("%2s", Integer.toHexString(i)).replace(' ', '0'));
+        }
+        System.out.println(s.toString());
+        byte[] d = s.toString().getBytes();
+        System.out.println(s.toString().getBytes().length);
+        String str = new String(d);
+        System.out.println(str);
+        for (int i = 0; i < str.length(); i += 2) {
+            System.out.printf(Integer.toHexString(Integer.parseInt(str.substring(i, i + 2), 16)) + " , ");
         }
     }
 
@@ -110,7 +134,7 @@ public class ChatroomFragment extends BaseFragment {
         if (robotMsg == null) {
             return;
         }
-        sb.append("recv:").append(robotMsg.msg).append("\n");
+        sb.append("recv:").append(new String(robotMsg.bytes)).append("\n");
         binding.tvEchoMsg.setText(sb.toString());
     }
 
