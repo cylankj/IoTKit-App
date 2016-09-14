@@ -87,6 +87,12 @@ dependencies {
     if (oem.equals("cylan")) {
         compile project(':JFGLibrary') //直接引用项目
     } else {
-        compile fileTree(include: ['*.aar'], dir: 'libs')
+        fileTree(dir: 'libs', include: '**/*.aar')
+            .each { File file ->
+                dependencies.add("compile", [
+                name: file.name.lastIndexOf('.').with { it != -1 ? file.name[0..<it] : file.name }, 
+                ext: 'aar'
+        ])}
+}
     }
 }
