@@ -15,6 +15,7 @@ import com.cylan.constants.JfgConstants;
 import com.cylan.entity.jniCall.JFGDPMsg;
 import com.cylan.entity.jniCall.JFGDevBaseValue;
 import com.cylan.entity.jniCall.JFGDevice;
+import com.cylan.entity.jniCall.JFGDoorBellCaller;
 import com.cylan.entity.jniCall.JFGResult;
 import com.cylan.entity.jniCall.RobotoGetDataRsp;
 import com.cylan.jfgapp.jni.JfgAppCmd;
@@ -269,7 +270,12 @@ public class DevListFragment extends BaseFragment {
                 adapter.notifyItemChanged(index);
             }
         }
+    }
 
+    @Subscribe()
+    public void onDoorBellCall(JFGDoorBellCaller caller) {
+        SLog.i("call form: " + caller.cid + " , url: " + caller.url);
+        Toast.makeText(getContext(), "call form: "+caller.cid, Toast.LENGTH_SHORT).show();
     }
 
 
