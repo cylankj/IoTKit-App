@@ -87,7 +87,7 @@ public class DevListFragment extends BaseFragment {
                 if (v.getTag() != null && v.getTag() instanceof Integer) {
                     final int position = (int) v.getTag();
                     JFGDevice d = adapter.getDevice()[position];
-                    if (d.pid == 86 || d.pid == 18) {
+                    if (d.pid == 86 || d.pid == 18 || d.pid == 19) {
                         Intent intent = new Intent(getContext(), VRPlayActivity.class);
                         intent.putExtra("device", d);
                         getContext().startActivity(intent);
@@ -275,7 +275,7 @@ public class DevListFragment extends BaseFragment {
     @Subscribe()
     public void onDoorBellCall(JFGDoorBellCaller caller) {
         SLog.i("call form: " + caller.cid + " , url: " + caller.url);
-        Toast.makeText(getContext(), "call form: "+caller.cid, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "call form: " + caller.cid, Toast.LENGTH_SHORT).show();
     }
 
 
