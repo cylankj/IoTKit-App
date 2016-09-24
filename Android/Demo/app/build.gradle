@@ -88,6 +88,11 @@ dependencies {
     if (oem.equals("cylan")) {
         compile project(':JFGLibrary') //直接引用项目
     } else {
-        compile(name: 'JfgAndroidSDK-3.0.119', ext: 'aar')  //引用aar包 , 注意版本号的更新。
+        fileTree(dir: 'libs', include: '**/*.aar')
+            .each { File file ->
+                dependencies.add("compile", [
+                name: file.name.lastIndexOf('.').with { it != -1 ? file.name[0..<it] : file.name }, 
+                ext: 'aar'
+        ])}
     }
 }
