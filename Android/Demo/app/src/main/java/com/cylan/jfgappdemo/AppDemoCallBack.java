@@ -1,6 +1,7 @@
 package com.cylan.jfgappdemo;
 
 import android.os.SystemClock;
+import android.widget.Toast;
 
 import com.cylan.entity.jniCall.JFGAccount;
 import com.cylan.entity.jniCall.JFGDPMsg;

@@ -80,6 +80,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:design:23.2.1'
+
     // 以下两种形式均为引用库。我司可以直接引用本地库。贵司只能使用aar包。
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
