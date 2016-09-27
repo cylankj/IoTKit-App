@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "549A3161E15AB8EC5D57D7753255A8268143EBDE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "549A3161E15AB8EC5D57D7753255A8268143EBDE" : 0,
+    "8D7F1F8D4694BF6C082F324BAD2E1EDBE0772450" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "8A71025A-42E4-458C-80BE-5D3D65D236D6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "549A3161E15AB8EC5D57D7753255A8268143EBDE" : "JFGSDKDemo\/",
+    "8D7F1F8D4694BF6C082F324BAD2E1EDBE0772450" : "JFGSDK\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "JFGFramworkDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "JFGFramworkDemo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/git.coding.net\/yangli996\/JFGSDKDemo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "549A3161E15AB8EC5D57D7753255A8268143EBDE"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/git.coding.net\/yangli996\/JFGSDK.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8D7F1F8D4694BF6C082F324BAD2E1EDBE0772450"
+    }
+  ]
+}
