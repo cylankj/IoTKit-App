@@ -1,3 +1,4 @@
+
 //
 //  VideoViewController.m
 //  JFGFramworkDemo
@@ -10,7 +11,6 @@
 #import <JFGSDK/JFGSDK.h>
 #import "HistoryVideoViewController.h"
 #import "RobotMsgViewController.h"
-#import <JFGSDK/JFGSDKPlayVideo.h>
 #import <JFGSDK/JFGSDKVideoView.h>
 
 @interface VideoViewController ()<JFGSDKPlayVideoDelegate,UITableViewDelegate,UITableViewDataSource,JFGSDKCallbackDelegate>
@@ -18,7 +18,7 @@
     UIView *btnBgView;
     BOOL isAudio;
     BOOL isTalkBack;
-    //JFGSDKPlayVideo *playVideo;
+    
     NSMutableArray *dataArray;
     NSMutableArray *_datArray;
     
@@ -58,6 +58,20 @@
     
 }
 
+-(void)setViewTop:(CGFloat)top forView:(UIView *)vw
+{
+    CGRect frame = vw.frame;
+    frame.origin.y = top;
+    vw.frame = frame;
+}
+
+-(void)subViewSizeToFitWithTop:(CGFloat)top
+{
+    [self setViewTop:top forView:self.voiceButton];
+    [self setViewTop:top forView:self.snapBtn];
+    [self setViewTop:top forView:self.microphoneBtn];
+    [self setViewTop:top+50+20 forView:self.historyTableView];
+}
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -69,18 +83,15 @@
     
     //视频播放类初始化
     if (!playView) {
-        playView = [[JFGSDKVideoView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 300)];
+        playView = [[JFGSDKVideoView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 255)];
+        playView.center = CGPointMake(self.view.bounds.size.width*0.5, 64+300);
         playView.delegate = self;
         [self.view addSubview:playView];
-        
         [playView getHistoryVideoList:self._cid];
     }
     
     //开始直播
     [self startLiveVideo];
-    NSLog(@"self:%@",self);
-   
-    
 }
 
 -(void)jfgFriendRequestList:(NSArray<JFGSDKFriendRequestInfo *> *)list error:(JFGErrorType)errorType
@@ -92,7 +103,7 @@
 -(void)startLiveVideo
 {
     //开始视频播放
-    [playView startLiveVideo:self._cid loadLocalVideo:nil];
+    [playView startLiveRemoteVideo:self._cid];
     //菊花
     [self.activityIndicator startAnimating];
     self.voiceButton.alpha = 1;
@@ -113,7 +124,10 @@
 {
     //停止视频播放
     [playView stopVideo];
+    
+    
 }
+
 
 
 #pragma mark JFGSDK delegate
@@ -136,18 +150,25 @@
                          height:(int)height
                            peer:(NSString *)peer
 {
-    //直播视频视图渲染成功，将其添加到背景视图上（停止播放后会自动移除）
-    //[self.videoBackgroudView addSubview:playVideo.remoteVideoView];
+   
+    NSLog(@"[w:%d h:%d]",width,height);
     
-    //设置背景视图大小
-    //self.videoBackgroudView.bounds = CGRectMake(0, 0, width*.5, height*0.5);
-    //self.videoBackgroudView.center = CGPointMake(self.view.center.x, 64+height*0.25);
+
+    CGRect frame = playView.frame;
+    frame.origin.x = 0;
+    frame.origin.y = 64;
+    frame.size.height = height;
+    playView.frame = frame;
     
-    //设置直播视图大小
-    //playVideo.remoteVideoView.frame = CGRectMake(0, 0, width*.5, height*0.5);
-    playView.frame = CGRectMake(0, 0, width*.5, height*0.5);
-    playView.center = CGPointMake(self.view.center.x, 64+height*0.25);
     [self.activityIndicator stopAnimating];
+    
+    
+    //其他控件重新布局
+    [self subViewSizeToFitWithTop:height+64+20];
+    CGRect tableframe = self.historyTableView.frame;
+    tableframe.size.height = self.view.bounds.size.height - tableframe.origin.y;
+    self.historyTableView.frame = tableframe;
+   
 }
 
 
@@ -200,9 +221,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //[playVideo stopVideoPlay];
-    JFGSDKHistoryVideoInfo *info  = dataArray[indexPath.row];
-    [self startHistoryVideo:info.beginTime];
-    [self.rightBarItem setTitle:@"Live"];
+//    JFGSDKHistoryVideoInfo *info  = dataArray[indexPath.row];
+//    [self startHistoryVideo:info.beginTime];
+//    [self.rightBarItem setTitle:@"Live"];
+    
+   
 }
 
 #pragma mark- action
