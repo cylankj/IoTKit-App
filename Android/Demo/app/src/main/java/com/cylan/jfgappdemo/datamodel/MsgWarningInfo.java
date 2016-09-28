@@ -9,12 +9,24 @@ import org.msgpack.annotation.Message;
 @Message
 public class MsgWarningInfo extends BaseDataPoint {
 
+    /**
+     * The Time.
+     */
     @Index(0)
     public long time;
+    /**
+     * The Is recode.
+     */
     @Index(1)
     public int isRecode;
+    /**
+     * The Files.
+     */
     @Index(2)
     public int files;
+    /**
+     * The Type.
+     */
     @Index(3)
     public int type;
 
