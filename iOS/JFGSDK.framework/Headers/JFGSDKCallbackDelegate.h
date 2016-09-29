@@ -298,11 +298,19 @@
 
 
 /**
- *  反馈消息回调
+ *  获取反馈消息回调
  *
  *  @param infoList  消息列表
  *  @param errorType 错误码
  */
 -(void)jfgFeedBackWithInfoList:(NSArray <JFGSDKFeedBackInfo *> *)infoList errorType:(JFGErrorType)errorType;
+
+
+/**
+ *  发送反馈意见结果
+ *
+ *  @param errorType 错误码
+ */
+-(void)jfgSendFeedBackResult:(JFGErrorType)errorType;
 
 @end
