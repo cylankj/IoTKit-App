@@ -76,6 +76,11 @@
  */
 +(void)appendStringToLogFile:(NSString *)str;
 
+#pragma mark- 摄像头相关
++(void)connectCamera:(NSString *)cid;
++(void)startRenderRemoteView:(UIView *)view;
++(void)stopRenderView:(BOOL)local withCid:(NSString *)cid;
++(BOOL)disconnectVideo:(NSString *)remote;
 
 #pragma mark - 登录与注册 Login and register
 /*!
@@ -416,7 +421,7 @@
 /**
  *  获取反馈未读回复列表
  */
-//+(void)getFeedbackList;
++(void)getFeedbackList;
 
 
 /*!
