@@ -27,11 +27,15 @@
         <!-- your vid getString must "\ " -->
         <meta-data
             android:name="vid"
-            android:value="\ 00A0" />
+            android:value="\ 0031" />
         <!-- your vkey -->
         <meta-data
             android:name="vkey"
-            android:value="qpqNCZvkcNca3KsfD6b0gm6S4ncsRVYa" />
+            android:value="ehOJhHkpi9H4q6WfYMLlmNiJWypMxfwu" />
+        <!--change server address -->
+        <meta-data
+            android:name="ServerAddress"
+            android:value="robot.jfgou.com:443" />
 
 
         <activity android:name=".ui.DemoActivity">
