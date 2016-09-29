@@ -14,7 +14,6 @@
 #import "MessageViewController.h"
 #import "BindingDevicesViewController.h"
 #import "AddDeviceViewController.h"
-#import <JFGSDK/JFGSDKPlayVideo.h>
 #import <JFGSDK/JFGSDKDataPoint.h>
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <SystemConfiguration/CaptiveNetwork.h>

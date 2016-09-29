@@ -7,15 +7,16 @@
 //
 
 #import "PanoramicCameraViewController.h"
-#import <JFGSDK/JFGSDKPlayVideo.h>
+#import <JFGSDK/JFGSDKVideoView.h>
 
 @interface PanoramicCameraViewController ()<JFGSDKPlayVideoDelegate>
 {
     VideoRenderIosView *remoteView;
-    JFGSDKPlayVideo *playVideo;
+    JFGSDKVideoView *playVideo;
     UIButton *gyroBtn;//开启、关闭陀螺仪
     UIButton *vrBtn;//开启关闭VR模式
     UIButton *mountModeBtn;//墙壁模式与屋顶模式
+    UIButton *snapBtn;
 }
 @end
 
@@ -25,23 +26,22 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    playVideo = [[JFGSDKPlayVideo alloc]init];
+    playVideo = [[JFGSDKVideoView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.width)];
     playVideo.delegate = self;
-    remoteView = [[VideoRenderIosView alloc] initPanoramicViewWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.width)];
-    remoteView.backgroundColor = [UIColor blackColor];
+    
+
+    remoteView = [playVideo startPanoramaLiveRemoteVideoForCid:self.cid];
     [remoteView configV360:CameraParam::getTopPreset()];
-    [self.view addSubview:remoteView];
+    
+    [self.view addSubview:playVideo];
     
     [self initVrBtnWithTop:self.view.bounds.size.width+64];
-    
-    [playVideo startLiveVideo:self.cid renderView:remoteView];
-    
     // Do any additional setup after loading the view.
 }
 
 -(void)viewDidDisappear:(BOOL)animated
 {
-    [playVideo stopVideoPlay];
+    [playVideo stopRenderLocalView];
 }
 
 -(void)jfgRTCPNotifyBitRate:(int)bitRate
@@ -133,11 +133,11 @@
     [mountModeBtn removeFromSuperview];
     
     
-    NSArray *btnTitleArr = @[@"开启陀螺仪",@"开启VR",@"开启墙壁模式"];
+    NSArray *btnTitleArr = @[@"开启陀螺仪",@"开启VR",@"开启墙壁模式",@"截图"];
     
-    NSArray *btnSelectedTitleArr = @[@"关闭陀螺仪",@"关闭VR",@"开启屋顶模式"];
+    NSArray *btnSelectedTitleArr = @[@"关闭陀螺仪",@"关闭VR",@"开启屋顶模式",@"截图"];
     CGFloat bWidth = 100;
-    CGFloat space = (self.view.bounds.size.width-bWidth*3)/4;
+    CGFloat space = (self.view.bounds.size.width-bWidth*3)/6;
     [btnTitleArr enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL * _Nonnull stop) {
         
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -181,7 +181,12 @@
             
         }
             break;
+        case 2003:{//截图
             
+            UIImage *image = [playVideo videoScreenshotForLocal:NO];
+            NSLog(@"snap:%@",image);
+            
+        }
         default:
             break;
     }
