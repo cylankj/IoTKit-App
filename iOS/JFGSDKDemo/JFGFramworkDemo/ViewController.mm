@@ -28,8 +28,8 @@
 #define USERNAME @"18503060168"
 #define USERPASS @"123456"
 
-#define VID @"00A0"
-#define VKEY @"qpqNCZvkcNca3KsfD6b0gm6S4ncsRVYa"
+#define VID @"0001"
+#define VKEY @"dnwB7zfqjOqUmayw9XbVbfWh8ahSIShs"
 
 
 @interface ViewController ()<JFGSDKCallbackDelegate,UITextFieldDelegate>
