@@ -11,8 +11,8 @@
 
 @interface PanoramicCameraViewController ()<JFGSDKPlayVideoDelegate>
 {
-    VideoRenderIosView *remoteView;
     JFGSDKVideoView *playVideo;
+    UIView *remoteView;
     UIButton *gyroBtn;//开启、关闭陀螺仪
     UIButton *vrBtn;//开启关闭VR模式
     UIButton *mountModeBtn;//墙壁模式与屋顶模式
@@ -31,7 +31,7 @@
     
 
     remoteView = [playVideo startPanoramaLiveRemoteVideoForCid:self.cid];
-    [remoteView configV360:CameraParam::getTopPreset()];
+    [playVideo configV360:PanoramaLiveModeTop];
     
     [self.view addSubview:playVideo];
     
@@ -160,23 +160,23 @@
     switch (sender.tag) {
         case 2000:{//陀螺仪
             
-            [remoteView enableGyro:!sender.selected];
+            [playVideo enableGyro:!sender.selected];
             
         }
             break;
             
         case 2001:{//VR
             
-            [remoteView enableVRMode:!sender.selected];
+            [playVideo enableVRMode:!sender.selected];
         }
             break;
             
         case 2002:{//悬挂模式
             
             if (sender.selected) {
-                [remoteView setMountMode:MOUNT_TOP];
+                [playVideo setMountMode:PanoramaCameraParamTopPreset];
             }else{
-                [remoteView setMountMode:MOUNT_WALL];
+                [playVideo setMountMode:PanoramaCameraParamWallPreset];
             }
             
         }

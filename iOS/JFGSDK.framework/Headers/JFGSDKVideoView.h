@@ -9,43 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "JFGSDKPlayVideoDelegate.h"
 
-enum MountMode {
-    MOUNT_TOP,
-    MOUNT_WALL,
+//全景摄像头悬挂模式
+typedef NS_ENUM(NSInteger,PanoramaCameraMode){
+    PanoramaLiveModeTop,
+    PanoramaLiveModeWall,
 };
 
-class CameraParam {
-public:
-    static CameraParam getTopPreset();
-    static CameraParam getWallPreset();
-    
-    CameraParam(int t_cx, int t_cy, int t_r, int t_w, int t_h, int t_fov);
-    CameraParam();
-    
-    int cx;  // 圆心X
-    int cy;  // 圆心Y
-    int r;   // 圆半径
-    
-    int w;   // 图片width
-    int h;   // 图片height
-    int fov; // field of view
+//全景摄像头参数设置
+typedef NS_ENUM(NSInteger,PanoramaCameraParam){
+    PanoramaCameraParamTopPreset,
+    PanoramaCameraParamWallPreset,
 };
-
-//视频渲染视图
-@interface VideoRenderIosView : UIView
-
-//以下为全景摄像头函数(暂时不用)
-- (id)initPanoramicViewWithFrame:(CGRect)frame;
-- (bool)isPanorama;
-- (void)setMountMode:(MountMode)mode;
-- (void)configV360:(CameraParam)p;
-- (void)enableGyro:(bool)enable;
-- (void)enableVRMode:(bool)enable;
-- (void)notifyViewSizeChanged;
-- (BOOL)loadImage:(NSString*)imgPath;
-
-@end
-
 
 
 @interface JFGSDKVideoView : UIView
@@ -63,14 +37,6 @@ public:
  *  @param cid            设备标示
  */
 -(void)startLiveRemoteVideo:(NSString *)cid;
-
-
-/**
- *  播放直播（全景摄像头,此功能暂时不完善）
- *
- *  @param cid 设备标示
- */
--(VideoRenderIosView *)startPanoramaLiveRemoteVideoForCid:(NSString *)cid;
 
 
 /**
@@ -92,10 +58,11 @@ public:
 /**
  *  开始渲染本地摄像头画面
  *
- *  @param localView 本地摄像头渲染视图
+ *  @param superView 本地图像渲染承载视图
+ *  @param tag       本地渲染视图tag
  *  @param front     是否使用前置摄像头 YES：前置  NO：后置
  */
--(void)startRenderLocalView:(VideoRenderIosView *)localView forFrontCamera:(BOOL)front;
+-(void)startRenderLocalView:(UIView *)superView localViewTag:(NSInteger)tag forFrontCamera:(BOOL)front;
 
 
 /**
@@ -136,6 +103,18 @@ public:
             openSpeaker:(BOOL)openSpeaker;
 
 
+#pragma mark- 全景摄像头相关（持续完善中）
+/**
+ *  播放直播（全景摄像头,此功能暂时不完善）
+ *
+ *  @param cid 设备标示
+ */
+-(UIView *)startPanoramaLiveRemoteVideoForCid:(NSString *)cid;
 
+- (void)setMountMode:(PanoramaCameraMode)mode;
+- (void)configV360:(PanoramaCameraParam)p;
+- (void)enableGyro:(BOOL)enable;
+- (void)enableVRMode:(BOOL)enable;
+- (BOOL)loadImage:(NSString*)imgPath;
 
 @end
