@@ -30,8 +30,8 @@
     playVideo.delegate = self;
     
 
-    remoteView = [playVideo startPanoramaLiveRemoteVideoForCid:self.cid];
-    [playVideo configV360:PanoramaLiveModeTop];
+    [playVideo startPanoramaLiveRemoteVideoForCid:self.cid];
+    [playVideo configV360];
     
     [self.view addSubview:playVideo];
     

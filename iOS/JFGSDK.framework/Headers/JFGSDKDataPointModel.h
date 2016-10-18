@@ -10,7 +10,7 @@
 
 @interface DataPointSeg : NSObject
 
-@property (nonatomic,assign)int msgId;
+@property (nonatomic,assign)uint64_t msgId;
 @property (nonatomic,assign)uint64_t version;//数据产生对应时间戳
 @property (nonatomic,strong)NSData *value;//使用msgpack打包后的数据
 
@@ -19,7 +19,7 @@
 
 @interface DataPointIDVerRetSeg : NSObject
 
-@property (nonatomic,assign)int msgId;
+@property (nonatomic,assign)uint64_t msgId;
 @property (nonatomic,assign)int64_t version;//数据产生对应时间戳
 @property (nonatomic,assign)int ret;
 
@@ -27,14 +27,14 @@
 
 @interface DataPointIDVerSeg : NSObject
 
-@property (nonatomic,assign)int msgId;
+@property (nonatomic,assign)uint64_t msgId;
 @property (nonatomic,assign)int64_t version;// 数据产生对应时间戳
 
 @end
 
 @interface DataPointCountSeg : NSObject
 
-@property (nonatomic,assign)int msgId;
+@property (nonatomic,assign)uint64_t msgId;
 @property (nonatomic,assign)int count;
 
 @end

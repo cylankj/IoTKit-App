@@ -95,7 +95,7 @@ typedef void (^RobotDataFailedBlock)(RobotDataRequestErrorType type);
  *  @param limit 返回记录条数，范围是[1, 100]
  *  @param asc 是否按照时间倒叙
  *  @return 返回请求序列号
- *  提示：例如 ：asc为YES，则从服务器查找对应DataPointIDVerSeg中消息id为msgID，以数据产生时间戳version为数据起始点，倒叙的limit条数据。
+ *  提示：例如 ：asc为NO，则从服务器查找对应DataPointIDVerSeg中消息id为msgID，以数据产生时间戳version为数据起始点，倒叙的limit条数据。
  */
 -(NSNumber *)robotGetDataWithPeer:(NSString *)peer
                            msgIds:(NSArray <DataPointIDVerSeg *> *)idList

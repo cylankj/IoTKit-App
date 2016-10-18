@@ -9,6 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "JFGSDKPlayVideoDelegate.h"
 
+
+//视频渲染视图
+@interface VideoRenderIosView : UIView
+
+@end
+
+@interface PanoramicIosView : VideoRenderIosView
+
+// 初始化全景view
+- (id)initPanoramicViewWithFrame:(CGRect)frame;
+
+@end
+
 //全景摄像头悬挂模式
 typedef NS_ENUM(NSInteger,PanoramaCameraMode){
     PanoramaLiveModeTop,
@@ -109,12 +122,22 @@ typedef NS_ENUM(NSInteger,PanoramaCameraParam){
  *
  *  @param cid 设备标示
  */
--(UIView *)startPanoramaLiveRemoteVideoForCid:(NSString *)cid;
-
+- (void)startPanoramaLiveRemoteVideoForCid:(NSString *)cid;
+// 设置悬挂模式
 - (void)setMountMode:(PanoramaCameraMode)mode;
-- (void)configV360:(PanoramaCameraParam)p;
+// 设置摄像头参数(默认)
+- (void)configV360;
+//cx:圆心X  cy:圆心Y  r:圆半径  w:图片width  h:图片height  fov:field of view
+-(void)configV360WithCx:(int)cx cy:(int)cy r:(int)r w:(int)w h:(int)h fov:(int)fov;
+// 开启陀螺仪
 - (void)enableGyro:(BOOL)enable;
+// 开启VR分屏
 - (void)enableVRMode:(BOOL)enable;
+// 载入图片
 - (BOOL)loadImage:(NSString*)imgPath;
+// 获取双击的手势对象
+- (UITapGestureRecognizer*)getDoubleTapRecognizer;
+// 通知view方向变化
+- (void)detectOrientationChange;
 
 @end
