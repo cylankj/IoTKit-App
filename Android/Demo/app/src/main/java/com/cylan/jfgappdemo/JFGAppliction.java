@@ -53,9 +53,10 @@ public class JFGAppliction extends Application {
         if (!file.exists()) {
             file.mkdir();
         }
-        // 初始化,传入日志路径。
+
         try {
-            JfgAppCmd.initJfgAppCmd(this, cb, file.getAbsolutePath()); // log path
+            // 初始化,Context , AppCallBack , log file path .日志文件的存放路径。
+            JfgAppCmd.initJfgAppCmd(this, cb, file.getAbsolutePath());
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
