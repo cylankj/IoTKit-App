@@ -272,7 +272,7 @@ public class DevListFragment extends BaseFragment {
         }
     }
 
-    @Subscribe()
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDoorBellCall(JFGDoorBellCaller caller) {
         SLog.i("call form: " + caller.cid + " , url: " + caller.url);
         Toast.makeText(getContext(), "call form: " + caller.cid, Toast.LENGTH_SHORT).show();

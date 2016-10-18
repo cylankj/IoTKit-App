@@ -141,25 +141,25 @@ public class AppDemoCallBack implements AppCallBack {
 
     @Override
     public void OnRobotGetDataTimeout(long seq) {
-        SLog.d("");
+        SLog.d("time out:"+seq);
     }
 
     @Override
     public ArrayList<JFGDPMsg> OnQuerySavedDatapoint(String identity, ArrayList<JFGDPMsg> dps) {
-        SLog.d("");
+        SLog.d(identity);
         return null;
     }
 
     @Override
     public void OnlineStatus(boolean online) {
-        SLog.d("");
+        SLog.d(""+online);
         EventBus.getDefault().post(new JfgEvent.OnLineState(online));
     }
 
 
     @Override
     public void OnDoorBellCall(JFGDoorBellCaller caller) {
-        SLog.i("call form: " + caller.cid + " , url: " + caller.url);
+        SLog.d("call form: " + caller.cid + " , url: " + caller.url);
         EventBus.getDefault().post(caller);
     }
 
@@ -234,7 +234,7 @@ public class AppDemoCallBack implements AppCallBack {
 
     @Override
     public void OnUpdateNTP(long unixTimestamp) {
-        SLog.i("unixTimestamp : " + JfgUtils.DetailedDateFormat.format(unixTimestamp * 1000));
+        SLog.d("unixTimestamp : " + JfgUtils.DetailedDateFormat.format(unixTimestamp * 1000));
     }
 
     @Override
