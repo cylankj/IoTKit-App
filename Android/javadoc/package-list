@@ -5,10 +5,6 @@ com.cylan.entity.jniCall
 com.cylan.jfgapp.interfases
 com.cylan.jfgapp.jni
 com.cylan.panorama
-com.cylan.panorama.animation
-com.cylan.panorama.controller
-com.cylan.panorama.model
-com.cylan.panorama.ui
 com.cylan.udpMsgPack
 com.cylan.utils
 org.webrtc.interfaces
