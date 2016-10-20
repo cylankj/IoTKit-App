@@ -27,12 +27,12 @@ import com.cylan.jfgappdemo.databinding.FragmentDevListBinding;
 import com.cylan.jfgappdemo.datamodel.BindDevBean;
 import com.cylan.jfgappdemo.datamodel.IntAndString;
 import com.cylan.jfgappdemo.datamodel.StringAndInt;
+import com.cylan.utils.JfgMsgPackUtils;
 import com.superlog.SLog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.msgpack.MessagePack;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -179,8 +179,8 @@ public class DevListFragment extends BaseFragment {
      */
     private void getDataPoint(String peer) {
         ArrayList<JFGDPMsg> dp = new ArrayList<>();
-        JFGDPMsg msg = new JFGDPMsg(201, 0);  // query dev network
-        dp.add(msg);
+        dp.add(new JFGDPMsg(201, 0));// query dev network
+        dp.add(new JFGDPMsg(206, 0));// query dev battery
         long seq = JfgAppCmd.getInstance().robotGetData(peer, dp, 1, false, 0);
         SLog.i(peer + " seq:" + seq);
     }
@@ -200,14 +200,18 @@ public class DevListFragment extends BaseFragment {
         JFGDevice dev = adapter.getDevice()[index];
         if (dev == null) return;
         for (Map.Entry<Integer, ArrayList<JFGDPMsg>> entry : rsp.map.entrySet()) {
+
+            if (entry.getKey() == 206) {
+                JFGDPMsg dp = entry.getValue().get(0);
+                int battery = JfgMsgPackUtils.unpack(dp.packValue,Integer.class);
+                SLog.e("cid: " + rsp.identity + " , battery: " + battery);
+            }
+
             if (201 != entry.getKey()) continue;
             if (entry.getValue() == null) continue;
             JFGDPMsg dp = entry.getValue().get(0);
-            MessagePack pack = new MessagePack();
-            pack.register(Object.class);
-            IntAndString values = new MessagePack().read(dp.packValue, IntAndString.class);
+            IntAndString values =JfgMsgPackUtils.unpack(dp.packValue,IntAndString.class);
             SLog.i("netType:" + values.intValue + " , netName:" + values.strValue);
-            pack.unregister();
             // baseValue
             dev.base = new JFGDevBaseValue(); // 判断base 是否为空。
             dev.base.netType = values.intValue;
@@ -259,7 +263,7 @@ public class DevListFragment extends BaseFragment {
             for (JFGDPMsg msg : data.list) {
                 SLog.w("sync dpId:" + msg.id);
                 if (msg.id != 201) continue;  // 此处判断网络类型。
-                IntAndString values = new MessagePack().read(msg.packValue, IntAndString.class);
+                IntAndString values = JfgMsgPackUtils.unpack(msg.packValue,IntAndString.class);
                 SLog.i("sync int Value:" + values.intValue + " , sync String Value:" + values.strValue);
                 // baseValue
                 if (dev.base == null) {

@@ -22,8 +22,7 @@ import com.cylan.jfgapp.jni.JfgAppCmd;
 import com.cylan.jfgappdemo.JfgEvent;
 import com.cylan.jfgappdemo.R;
 import com.cylan.jfgappdemo.databinding.FragmentSettingsBinding;
-import com.cylan.jfgappdemo.datamodel.SingleBool;
-import com.cylan.jfgappdemo.datamodel.SingleInt;
+import com.cylan.utils.JfgMsgPackUtils;
 import com.superlog.SLog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -43,6 +42,7 @@ public class SettingsFragment extends BaseFragment {
 
     JFGDevice device;
     FragmentSettingsBinding binding;
+
 
     public static SettingsFragment getInstance(Bundle bundle) {
         SettingsFragment fragment = new SettingsFragment();
@@ -83,7 +83,7 @@ public class SettingsFragment extends BaseFragment {
         EventBus.getDefault().unregister(this);
     }
 
-    private void addListener() {
+    private void addListener(){
         binding.rgRecordType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -91,9 +91,11 @@ public class SettingsFragment extends BaseFragment {
                 SLog.w("checkedId:" + checkedId);
                 ArrayList<JFGDPMsg> list = new ArrayList<JFGDPMsg>();
                 JFGDPMsg msg = new JFGDPMsg(303, System.currentTimeMillis() / 1000);
-                SingleInt si = new SingleInt();
-                si.value = type;
-                msg.packValue = si.toBytes();
+                try {
+                    msg.packValue = JfgMsgPackUtils.pack(type);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 list.add(msg);
                 long seq = JfgAppCmd.getInstance().robotSetData(device.uuid, list);
                 SLog.i("seq: " + seq);
@@ -104,9 +106,11 @@ public class SettingsFragment extends BaseFragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ArrayList<JFGDPMsg> list = new ArrayList<JFGDPMsg>();
                 JFGDPMsg msg = new JFGDPMsg(501, System.currentTimeMillis() / 1000);
-                SingleBool si = new SingleBool();
-                si.value = isChecked;
-                msg.packValue = si.toBytes();
+                try {
+                    msg.packValue =JfgMsgPackUtils.pack(isChecked);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 list.add(msg);
                 long seq = JfgAppCmd.getInstance().robotSetData(device.uuid, list);
                 SLog.i("seq: " + seq);
@@ -155,19 +159,18 @@ public class SettingsFragment extends BaseFragment {
                 case 501:
                     if (entry.getValue().size() > 0) {
                         byte[] data = entry.getValue().get(0).packValue;
-                        MessagePack pack = new MessagePack();
-                        SingleBool sb = pack.read(data, SingleBool.class);
-                        SLog.i("key:" + key + " ,value: " + sb.value);
-                        binding.swMotionDetection.setChecked(sb.value);
+                       boolean flag =JfgMsgPackUtils.unpack(data,Boolean.class);
+                        SLog.e("key:" + key + " ,value: " +flag);
+                        binding.swMotionDetection.setChecked(flag);
                     }
                     break;
                 case 303:
                     if (entry.getValue().size() > 0) {
                         byte[] data = entry.getValue().get(0).packValue;
-                        MessagePack pack = new MessagePack();
-                        SingleInt sb = pack.read(data, SingleInt.class);
-                        binding.rgRecordType.check(sb.value + 1);
-                        ((RadioButton) binding.rgRecordType.getChildAt(sb.value)).setChecked(true);
+                        int state = JfgMsgPackUtils.unpack(data,Integer.class);
+                        binding.rgRecordType.check(state + 1);
+                        SLog.e("key:" + key + " ,value: " + state);
+                        ((RadioButton) binding.rgRecordType.getChildAt(state)).setChecked(true);
                     }
                     break;
                 default:
