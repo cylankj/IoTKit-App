@@ -2,7 +2,10 @@
 
   此帮助文档主要介绍加菲狗Android SDK的大致逻辑。
 
- #2016/10/19 
+ #3.0.132
+   1.添加一个MessagePack的工具类 ‘JfgMessagePackUtils’。
+   
+ #3.0.131
    1.将DatePoint 中 id 的数据类型为 long 类型。
 
  #3.0.130
