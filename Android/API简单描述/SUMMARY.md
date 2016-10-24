@@ -14,3 +14,5 @@
 
 * [播放录像](playVideo.md)
 
+* [账号设置](account.md)
+
