@@ -245,7 +245,7 @@
  *  @param account 被检查的账号
  *  @param isExist 是否存在
  */
--(void)jfgCheckAccount:(NSString *)account isExist:(BOOL)isExist;
+-(void)jfgCheckAccount:(NSString *)account alias:(NSString *)alias isExist:(BOOL)isExist;
 
 /**
  *  分享设备结果
@@ -279,7 +279,7 @@
  *  @param errorType 结果
  *  @param list      好友列表
  */
--(void)jfgUnshareFriendListByCidResult:(JFGErrorType)errorType list:(NSArray <JFGSDKFriendRequestInfo *>*)list;
+-(void)jfgUnshareFriendListByCidResult:(JFGErrorType)errorType list:(NSArray <JFGSDKFriendInfo *>*)list;
 
 /**
  *  NTP时间更新
@@ -312,5 +312,13 @@
  *  @param errorType 错误码
  */
 -(void)jfgSendFeedBackResult:(JFGErrorType)errorType;
+
+
+/**
+ *  upload device token result
+ *
+ *  @param errorType  error type
+ */
+-(void)jfgUploadDeviceTokenResult:(JFGErrorType)errorType;
 
 @end

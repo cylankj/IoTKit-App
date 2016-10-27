@@ -505,7 +505,7 @@
 					"$(PROJECT_DIR)/..",
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_INPUT_FILETYPE = automatic;
 				HEADER_SEARCH_PATHS = (
 					"$(SHARED_INTERMEDIATE_DIR)",
 					"$(inherited)",
@@ -516,6 +516,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/JFGFramworkDemo/RSALibary/OpenSSL/lib",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jiafeigou.push;
@@ -537,7 +538,7 @@
 					"$(PROJECT_DIR)/..",
 				);
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_INPUT_FILETYPE = automatic;
 				HEADER_SEARCH_PATHS = (
 					"$(SHARED_INTERMEDIATE_DIR)",
 					"$(inherited)",
@@ -548,6 +549,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/JFGFramworkDemo/RSALibary/OpenSSL/lib",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jiafeigou.push;

@@ -28,9 +28,6 @@
 +(void)connectForWorkDir:(NSString *)path;
 
 
-
-
-
 /*!
  *  添加JFGSDK回调代理
  *  @param delegate 代理
@@ -52,11 +49,11 @@
 +(void)removeDelegate:(id<JFGSDKCallbackDelegate>)delegate;
 
 /**
- *  当前客户端网络状态
+ *  Current network status
  *
- *  @return 网络状态
+ *  @return network status
  */
--(JFGNetType)currentNetworkStatus;
++(JFGNetType)currentNetworkStatus;
 
 /*!
  *  日志开关操作
@@ -70,13 +67,19 @@
 
 
 /**
- *  写日志文件
+ *  Write log file
  *
- *  @param str 写入的字符串内容
+ *  @param str  Write content
  */
 +(void)appendStringToLogFile:(NSString *)str;
 
 
+/**
+ *  upload devicee Token
+ *
+ *  @param deviceToken deviceToken
+ */
++(void)uploadDeviceToken:(NSString *)deviceToken;
 
 #pragma mark - 登录与注册 Login and register
 /*!
@@ -93,7 +96,10 @@
  *  register
  *  After successful registration, the answer can be used normally, no need to call #userLogin: keyword
  *  @param account
- *  @param keyword password
+ *  @param keyword   password
+ *  @param type      register Type 0:phone 1:email
+ *  @param token     MSM check token（call-back:#jfgSendSMSResult:token） 
+                     If the mailbox is registered, please fill in @""
  *  call-back  #jfgLoginResult:
  */
 +(void)userRegister:(NSString *)account
@@ -103,10 +109,10 @@
                 vid:(NSString *)vid;
 
 /**
- *  发送验证码
+ *  send SMS code
  *
- *  @param phone     手机号
- *  @param type      0:注册/绑定手机号   1:忘记密码   2:修改密码
+ *  @param phone     phone
+ *  @param type      0:register/binding phone   1:forget password   2:Modify password
  */
 +(void)sendSMSWithPhoneNumber:(NSString *)phone type:(int)type;
 
@@ -114,9 +120,9 @@
 /**
  *  验证码校验
  *
- *  @param account 账号
- *  @param code    短信码
- *  @param token   获取验证码时回调的token #jfgSendSMSResult:token:
+ *  @param account account
+ *  @param code    SMS code
+ *  @param token   Gets the token of the callback when the verification code is #jfgSendSMSResult:token:
  */
 +(void)verifySMSWithAccount:(NSString *)account
                        code:(NSString *)code
@@ -132,6 +138,8 @@
  *  Login
  *  @param account
  *  @param keyword password
+ *  @param vid
+ *  @param vkey
  *  call-back #jfgLoginResult:
  */
 +(JFGErrorType)userLogin:(NSString *)account
@@ -141,7 +149,7 @@
 
 
 /**
- *  获取登录session
+ *  Logined session
  *
  *  @return session
  */
@@ -180,37 +188,33 @@
 
 /*!
  *  获取账号属性
- *  @return YES 表示成功
  *  回调 #jfgUpdateAccount:
  
  ~English
  *  get account info
- *  @return YES success
  *  call-back  #jfgUpdateAccount:
  */
 +(void)getAccount;
 
 
 /**
- *  是否推送消息
+ *  Set account mail or alias
  *
- *  @param push     是否开启推送消息
- */
-+(void)isOpenPush:(BOOL)push;
-
-/**
- *  设置账号邮箱或者别名（可以同时设置也可只设置某一个，未设置项填空）
- *
- *  @param email email（不设置填nil）
- *  @param alias alias(不设置填nil)
+ *  @param email email（Do not set to fill nil）
+ *  @param alias alias(Do not set to fill nil)
  */
 +(void)resetAccountEmail:(NSString *)email orAlias:(NSString *)alias;
 
 /**
- *  重置/绑定手机号
+ *  重置绑定手机号
  *
  *  @param phone 手机号
  *  @param token 手机号验证token（#sendSMSWithPhoneNumber:type获取）
+ 
+ ~English
+ *  reset binding phone
+ *  @param phone
+ *  @param token: phone check token
  */
 +(void)resetAccountPhone:(NSString *)phone token:(NSString *)token;
 
@@ -220,6 +224,13 @@
  *  @param account     账号
  *  @param oldPassword 旧密码
  *  @param newPassword 新密码
+ 
+ ~English
+ *  change Password
+ *
+ *  @param account     account
+ *  @param oldPassword old password
+ *  @param newPassword new password
  */
 +(void)changePasswordWithAccount:(NSString *)account
                      oldPassword:(NSString *)oldPassword
@@ -232,6 +243,9 @@
  *  @param account     账号
  *  @param token       短信验证token（获取短信验证码回调）
  *  @param newPassword 新密码
+ 
+ *  forget password
+
  */
 +(void)forgetPasswordWithAccount:(NSString *)account
                            token:(NSString *)token
@@ -243,18 +257,24 @@
  *
  *  @param email 修改的邮箱
  *  @param vid   vid
+ 
+ *  forget password (email)
  */
 +(void)forgetPasswordWithEmail:(NSString *)email vid:(NSString *)vid;
 
 #pragma mark- 好友相关
 /**
  *  获取好友列表
+ 
+ *  get friend List
  */
 +(void)getFriendList;
 
 
 /**
  *  获取好友请求列表
+ 
+ *  get friend request list
  */
 +(void)getFriendRequestList;
 
@@ -264,6 +284,10 @@
  *
  *  @param account      好友账号
  *  @param additionTags 附加问候语
+ 
+ *  Send add friend request
+ *  @param account
+ *  @param additionTags greetings
  */
 +(void)addFriendByAccount:(NSString *)account additionTags:(NSString *)additionTags;
 
@@ -272,6 +296,9 @@
  *  发送删除好友请求
  *
  *  @param account 好友账号
+ 
+ *  send del friend request
+ *  @param accoun  friend account
  */
 +(void)delFriendByAccount:(NSString *)account;
 
@@ -280,6 +307,9 @@
  *  同意对方加好友的请求
  *
  *  @param account 好友账号
+ 
+ *  Agree with each other to add a friend's request
+ *  @param account
  */
 +(void)agreeRequestForAddFriendByAccount:(NSString *)account;
 
@@ -289,6 +319,10 @@
  *
  *  @param remarkName 备注名
  *  @param account    好友账号
+ 
+ *  set friend nickname
+ *  @param remarkName  nickName
+ *  @param account  friend account
  */
 +(void)setRemarkName:(NSString *)remarkName forFriendByAccount:(NSString *)account;
 
@@ -297,6 +331,9 @@
  *  获取好友备注名
  *
  *  @param account 好友账号
+ 
+ *  get friend nickName
+ *  @param account friend account
  */
 +(void)getFriendInfoByAccount:(NSString *)account;
 
@@ -304,6 +341,9 @@
  *  检测账号是否注册过
  *
  *  @param account 账号
+ 
+ *  Checking whether the account has been registered
+ *  @param  account
  */
 +(void)checkFriendIsExistWithAccount:(NSString *)account;
 
@@ -321,6 +361,10 @@
  *
  *  @param cid     设备标示
  *  @param account 好友账号
+ 
+ *  Cancel the devices to share your friends
+ *  @param cid  device number
+ *  @param account friend account
  */
 +(void)unShareDevice:(NSString *)cid forFriend:(NSString *)account;
 
@@ -328,6 +372,9 @@
  *  获取设备已分享的好友列表
  *
  *  @param cidList 请求设备标示列表
+ 
+ *  Get a list of friends that have been shared
+ *  @param cidList devices number
  */
 +(void)getDeviceSharedListForCids:(NSArray <NSString *>*)cidList;
 
@@ -335,6 +382,9 @@
  *  获取某设备未分享的好友列表
  *
  *  @param cid 设备标示
+ 
+ *  Get a device that is not shared by a friend
+ *  @param cid  device number
  */
 +(void)getUnShareListByCid:(NSString *)cid;
 
@@ -369,6 +419,8 @@
 
 /**
  *  刷新绑定设备列表
+ 
+ *  get list of devices already bound
  */
 +(void)refreshDeviceList;
 
@@ -377,6 +429,9 @@
  *  获取设备别名
  *
  *  @param cid 设备标示
+ 
+ *  get device nickName
+ *  @param cid device number
  */
 +(void)getAliasForCid:(NSString *)cid;
 
@@ -386,22 +441,12 @@
  *
  *  @param alias 别名
  *  @param cid   设备标示
+ 
+ *  set device nikeName
+ *  @param  alias nickName
+ *  @param  cid  device Number
  */
 +(void)setAlias:(NSString *)alias forCid:(NSString *)cid;
-
-
-/*!
- *  用户反馈
- *
- *  @param content     反馈内容
- *  @param attachement 日志文件
- 
- ~English
- *  User feedback
- *  @param content feedback content
- *  @param attachement  The log file
- */
-//+(void)sendFeedback:(NSString *)content attachement:(NSString *)attachement;
 
 
 /**
@@ -410,12 +455,16 @@
  *  @param timestamp 时间戳
  *  @param content   反馈内容
  *  @param isSend    接下来是否会上传日志文件（#httpPostWithReqPath:filePath:）
+ 
+ *  user feedback
  */
 +(void)sendFeedbackWithTimestamp:(int64_t)timestamp content:(NSString *)content hasSendLog:(BOOL)isSend;
 
 
 /**
  *  获取反馈未读回复列表
+ 
+ *  get unread feedback msg
  */
 +(void)getFeedbackList;
 
@@ -447,6 +496,10 @@
  *
  *  @param filePath  文件完整路径
  *  @param requestId 作为输出参数
+ 
+ *  send data to cloud storage
+ *  @param  filePath  File full path
+ *  @param  requestId  request ID
  */
 +(void)uploadFile:(NSString *)filePath toCloudFolderPath:(NSString *)folderPath requestId:(uint64_t)requestId;
 
@@ -457,6 +510,8 @@
  *  @param fileName 文件完整路径
  *
  *  @return 文件云访问路径
+ 
+ *  Access to cloud storage file access path
  */
 +(NSString *)getCloudUrlWithFlag:(int)flag fileName:(NSString *)fileName;
 

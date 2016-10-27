@@ -76,13 +76,14 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     
-//dataPoint实力
+//dataPoint实例
     
 //    DataPointSeg *seg = [[DataPointSeg alloc]init];
-//    seg.msgId = 214;
-//    seg.version = 0;
-//    NSArray *arr = [[NSArray alloc]initWithObjects:@"Asia",@"123456", nil];
-//    
+//    seg.msgId = 214;//消息id
+//    seg.version = 0;//消息产生时间，0即是取最近的时间
+//    NSArray *arr = [[NSArray alloc]initWithObjects:@"Asia",@"123456", nil];//具体内容（依据设备定义的结构）
+//
+      //msgpack封包
 //    NSData *vD = [MPMessagePackWriter writeObject:arr error:nil];
 //    seg.value = vD;
 //    
@@ -100,7 +101,8 @@
 //        for (NSArray *subArray in idDataList) {
 //            
 //            for (DataPointSeg *seg in subArray) {
-//                
+//
+                   //msgpack 数据解包
 //                id obj = [MPMessagePackReader readData:seg.value error:nil];
 //                NSLog(@"%@",obj);
 //                
