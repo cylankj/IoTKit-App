@@ -122,7 +122,7 @@ typedef NS_ENUM (NSUInteger, JFGErrorType){
 typedef NS_ENUM (NSUInteger,JFGFriendResultType){
     
     /// 添加好友请求的发送结果
-    JFGFriendResultTypeAddFriend = 7,
+    JFGFriendResultTypeAddFriend = 8,
     /// 删除好友请求的发送结果
     JFGFriendResultTypeDelFriend,
     /// 同意添加好友请求的发送结果
