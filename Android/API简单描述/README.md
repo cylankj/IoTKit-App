@@ -2,6 +2,10 @@
 
   此帮助文档主要介绍加菲狗Android SDK的大致逻辑。
 
+ #3.0.134
+   1.消息透传添加消息来源，caller。
+   2.JFGMsgHttpResult 的结果改为byte[]类型。
+
  #3.0.133
    1. JFGAccount 类添加一个 resetFlag() 方法。用来清空内部的一个标志。需要在setAccount之后调用。
    2.因为修改手机号必须要有token ，所以将两个参数合并。 setPhone(String phone,String token);
