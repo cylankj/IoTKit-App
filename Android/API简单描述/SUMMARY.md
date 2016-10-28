@@ -2,7 +2,7 @@
 
 * [简介](README.md)
 
-* [开始工作](readyWork.md)
+* [开始工作](SDK.md)
 
 * [用户注册](register.md)
 
