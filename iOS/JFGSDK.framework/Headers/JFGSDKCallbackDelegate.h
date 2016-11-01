@@ -166,6 +166,13 @@
  */
 -(void)jfgFpingRespose:(JFGSDKUDPResposeFping *)ask;
 
+/**
+ *  ping respose
+ *
+ *  @param ask ping msg
+ */
+-(void)jfgPingRespose:(JFGSDKUDPResposePing *)ask;
+
 
 #pragma mark- robot
 /*!

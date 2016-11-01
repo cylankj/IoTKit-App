@@ -30,7 +30,6 @@
  *  @param sn  新设备填写设备sn，旧设备无需填写（cid）
  *  @param ssid  wifi ssid
  *  @param key   wifi 密码
- *  注：暂不支持绑定有sn设备
  */
 -(void)bindDevWithSn:(NSString *)sn ssid:(NSString *)ssid key:(NSString *)key;
 

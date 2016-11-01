@@ -4,7 +4,7 @@
 //
 //  Created by 杨利 on 16/7/18.
 //  Copyright © 2016年 yangli. All rights reserved.
-//
+//  cylan dpID define  https://github.com/cylankj/IoTKit-MsgDefine/blob/master/msgDefine/atomic_define.md
 
 #import <Foundation/Foundation.h>
 #import "JFGSDKDataPointModel.h"
@@ -63,7 +63,7 @@ typedef void (^RobotDataFailedBlock)(RobotDataRequestErrorType type);
  *  @param dps         设置参数
  *  @param block       设置请求回调
  *  @param failedBlock 设置失败回调
- *
+ *  note   (msgID < 100) 会被过滤
  *  @return 请求标示码，可以用于取消block,防止引用导致引用计数问题
  */
 -(NSNumber *)robotSetDataWithPeer:(NSString *)peer
