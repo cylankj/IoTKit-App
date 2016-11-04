@@ -173,6 +173,13 @@
  */
 -(void)jfgPingRespose:(JFGSDKUDPResposePing *)ask;
 
+/**
+ *  set wifi
+ *
+ *  @param ask setwifi msg
+ */
+-(void)jfgSetWifiRespose:(JFGSDKUDPResposeSetWifi *)ask;
+
 
 #pragma mark- robot
 /*!

@@ -43,6 +43,13 @@
  */
 @property (nonatomic,assign) BOOL isOpneSound;
 
+/**
+ *  头像url
+ */
+@property (nonatomic,copy) NSString *headUrl;
+
+
+
 @end
 
 

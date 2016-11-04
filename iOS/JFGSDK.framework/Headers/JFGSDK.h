@@ -197,6 +197,13 @@
 +(void)getAccount;
 
 
++(void)isOpenPush:(BOOL)push;
+
+/**
+ *  Users upload the picture after the account need to call this method to notify the server
+ */
++(void)resetAccountPhoto;
+
 /**
  *  Set account mail or alias
  *
@@ -414,6 +421,24 @@
  */
 +(void)ping:(NSString *)ip;
 
+
+/*!
+ *  设置设备wifi
+ *
+ *  @param ssid wifi的ssid
+ *  @param key  wifi密码
+ *  @param cid  设备标示
+ *  @param ip   设备ip
+ *  @param mac  设备mac地址
+ *
+ *  @return 请求发送结果
+ */
++(JFGErrorType)wifiSetWithSSid:(NSString *)ssid
+                       keyword:(NSString *)key
+                           cid:(NSString *)cid
+                        ipAddr:(NSString *)ip
+                           mac:(NSString *)mac;
+
 #pragma mark - 解绑设备
 /**
  * 解绑设备（解绑成功后会触发#jfgDeviceList:回调）
@@ -523,6 +548,15 @@
  */
 +(NSString *)getCloudUrlWithFlag:(int)flag fileName:(NSString *)fileName;
 
+
+/**
+ *  copy cloud file to wonder
+ *
+ *  @param cloudFilePath cloud file path
+ *  @param wonderPath    wonder storage path
+ *  @param requestId     request id
+ */
++(void)copyCloudFile:(NSString *)cloudFilePath toWonderPath:(NSString *)wonderPath requestId:(uint64_t)requestId;
 
 
 /*!
