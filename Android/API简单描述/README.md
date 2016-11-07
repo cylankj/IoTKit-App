@@ -8,6 +8,13 @@
 
   ---
 
+ #3.0.135
+  
+  1.更新用户头像。 (流程：使用updateAccountPortrait 接口更新头像成功后，
+  调用JFGAccount类中的setPhoto方法，然后发送setAccount.最后服务器会更新JFGAccount中的photoUrl)
+  2.更改设备别名。 (流程：使用setAliasByCid设置设备名后，在OnReportJfgDevices查看具体的设备别名。)
+  3.DP空值也会返回到上层。
+
 
  #3.0.134 
 

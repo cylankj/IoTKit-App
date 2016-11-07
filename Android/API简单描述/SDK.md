@@ -4,6 +4,9 @@
 ---
 
 1.首先需要在[萝卜头运营平台][1]注册一个开发者账号。注册流程另有视频演示。
+<video src="assets/video.mp4" width="800" height="600" controls="controls">
+Your browser does not support the video tag.
+</video>
 
 2.注册完成后，在“企业信息”-->“账号设置”中找到“企业编号”即是VID。“SDK密钥”即是VKEY。如果SDK密钥内容为空，则点击右侧的更换即可。
   ![](assets/vid_vkey.png)

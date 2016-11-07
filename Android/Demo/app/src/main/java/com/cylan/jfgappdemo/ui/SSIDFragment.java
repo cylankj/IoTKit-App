@@ -274,21 +274,22 @@ public class SSIDFragment extends BaseFragment {
             scaner.sendEmptyMessageDelayed(3, 1000);
         } else if (TextUtils.equals(heard.cmd, JfgConstants.f_ping_ack)) {
             JfgUdpMsg.FPingAck fpingAck = pack.read(msg.data, JfgUdpMsg.FPingAck.class);
-            SLog.e(fpingAck.cid);
-            SLog.e(fpingAck.mac);
-            SLog.e(fpingAck.version);
+            SLog.i("cid: %s, mac: %s, version: %s",fpingAck.cid,fpingAck.mac,fpingAck.version);
             if (!TextUtils.equals(fpingAck.cid, bindDevBean.cid)) {
                 scaner.sendEmptyMessageDelayed(4, 1000);
                 return;
             }
             scaner.removeMessages(4);
             // show input fragment .
+            bindDevBean.mac = fpingAck.mac;
+            bindDevBean.version = fpingAck.version;
+            String ip = JfgNetUtils.getInstance(getContext()).getWayIpAddress();
+            bindDevBean.ip = ip;
             Bundle bundle = new Bundle();
             bundle.putSerializable("bindDevBean", bindDevBean);
             ArrayList<ScanResult> results = JfgNetUtils.getInstance(getContext()).getScanResult();
             bundle.putParcelableArrayList("list", results);
-            String ip = JfgNetUtils.getInstance(getContext()).getWayIpAddress();
-            bindDevBean.ip = ip;
+
             InputWifiCfgFragment fragment = InputWifiCfgFragment
                     .getInstance(bundle);
             getFragmentManager().beginTransaction()
