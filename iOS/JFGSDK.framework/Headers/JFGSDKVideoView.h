@@ -125,8 +125,6 @@ typedef NS_ENUM(NSInteger,PanoramaCameraParam){
 - (void)startPanoramaLiveRemoteVideoForCid:(NSString *)cid;
 // 设置悬挂模式
 - (void)setMountMode:(PanoramaCameraMode)mode;
-// 设置摄像头参数(默认)
-- (void)configV360;
 //cx:圆心X  cy:圆心Y  r:圆半径  w:图片width  h:图片height  fov:field of view
 -(void)configV360WithCx:(int)cx cy:(int)cy r:(int)r w:(int)w h:(int)h fov:(int)fov;
 // 开启陀螺仪

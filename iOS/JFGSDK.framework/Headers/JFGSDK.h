@@ -197,6 +197,13 @@
 +(void)getAccount;
 
 
++(void)isOpenPush:(BOOL)push;
+
+/**
+ *  Users upload the picture after the account need to call this method to notify the server
+ */
++(void)resetAccountPhoto;
+
 /**
  *  Set account mail or alias
  *
@@ -406,6 +413,32 @@
 +(void)fping:(NSString *)ip;
 
 
+/*!
+ *  ping命令
+ *  获取对应ip设备的cid,网络版本类型，端口信息
+ *  @note ip填写255.255.255.255将会局域网内所有设备信息
+ *  @param ip 设备ip地址
+ */
++(void)ping:(NSString *)ip;
+
+
+/*!
+ *  设置设备wifi
+ *
+ *  @param ssid wifi的ssid
+ *  @param key  wifi密码
+ *  @param cid  设备标示
+ *  @param ip   设备ip
+ *  @param mac  设备mac地址
+ *
+ *  @return 请求发送结果
+ */
++(JFGErrorType)wifiSetWithSSid:(NSString *)ssid
+                       keyword:(NSString *)key
+                           cid:(NSString *)cid
+                        ipAddr:(NSString *)ip
+                           mac:(NSString *)mac;
+
 #pragma mark - 解绑设备
 /**
  * 解绑设备（解绑成功后会触发#jfgDeviceList:回调）
@@ -515,13 +548,15 @@
  */
 +(NSString *)getCloudUrlWithFlag:(int)flag fileName:(NSString *)fileName;
 
-/*!
- * 进行HTTP GET操作
- * @param reqPath 请求路径, 如 /upload.php
- * @return 请求ID ,此调用是异步请求,稍后会有 #JFG_EVENT_ID_TOOLS_HTTP_DONE 消息提示是否成功
- * @note 可通过修改文件JFGSDKConstans.h 中JFGHTTP_PORT的值，来替换请求的post
+
+/**
+ *  copy cloud file to wonder
+ *
+ *  @param cloudFilePath cloud file path
+ *  @param wonderPath    wonder storage path
+ *  @param requestId     request id
  */
-+(int)httpGetWithReqPath:(NSString *)reqPath;
++(void)copyCloudFile:(NSString *)cloudFilePath toWonderPath:(NSString *)wonderPath requestId:(uint64_t)requestId;
 
 
 /*!
