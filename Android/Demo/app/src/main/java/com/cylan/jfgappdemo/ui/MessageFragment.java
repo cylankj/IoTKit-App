@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cylan.entity.JfgEnum;
 import com.cylan.entity.jniCall.JFGDPMsg;
 import com.cylan.entity.jniCall.JFGDevice;
 import com.cylan.entity.jniCall.RobotoGetDataRsp;
@@ -114,8 +115,9 @@ public class MessageFragment extends BaseFragment {
         ArrayList<String> urls = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             if ((info.files >> i & 0x1) == 1) {
-                String str = "/" + identity + "/" + info.time + "_" + (i + 1) + ".jpg";
-                String url = JfgAppCmd.getInstance().getCloudUrl(str);
+                String file = info.time + "_" + (i + 1) + ".jpg";
+                // 获取报警图片URL
+                String url = JfgAppCmd.getInstance().getCloudUrlByType(JfgEnum.JFG_URL.WARNING,info.type,file,identity);
                 urls.add(url);  // add url ;
             }
         }

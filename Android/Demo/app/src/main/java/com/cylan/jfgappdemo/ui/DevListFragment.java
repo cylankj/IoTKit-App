@@ -205,11 +205,11 @@ public class DevListFragment extends BaseFragment {
         JFGDevice dev = adapter.getDevice()[index];
         if (dev == null) return;
         for (Map.Entry<Integer, ArrayList<JFGDPMsg>> entry : rsp.map.entrySet()) {
-            SLog.i("dp key: "+entry.getKey());
+            SLog.d("dp key: "+entry.getKey());
             if (entry.getKey() == 206) {
                 JFGDPMsg dp = entry.getValue().get(0);
                 int battery = JfgMsgPackUtils.unpack(dp.packValue, Integer.class);
-                SLog.e("cid: " + rsp.identity + " , battery: " + battery);
+                SLog.i("cid: " + rsp.identity + " , battery: " + battery);
             }
 
             if (201 != entry.getKey()) continue;
