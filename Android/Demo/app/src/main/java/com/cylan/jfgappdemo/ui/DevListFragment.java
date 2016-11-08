@@ -3,6 +3,7 @@ package com.cylan.jfgappdemo.ui;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.cylan.constants.JfgConstants;
+import com.cylan.entity.jniCall.JFGAccount;
 import com.cylan.entity.jniCall.JFGDPMsg;
 import com.cylan.entity.jniCall.JFGDevBaseValue;
 import com.cylan.entity.jniCall.JFGDevice;
@@ -125,6 +127,7 @@ public class DevListFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        test();
     }
 
     @Override
@@ -182,6 +185,7 @@ public class DevListFragment extends BaseFragment {
         ArrayList<JFGDPMsg> dp = new ArrayList<>();
         dp.add(new JFGDPMsg(201, 0));// query dev network
         dp.add(new JFGDPMsg(206, 0));// query dev battery
+        dp.add(new JFGDPMsg(509, 0));
         long seq = JfgAppCmd.getInstance().robotGetData(peer, dp, 1, false, 0);
         SLog.i(peer + " seq:" + seq);
     }
@@ -201,17 +205,17 @@ public class DevListFragment extends BaseFragment {
         JFGDevice dev = adapter.getDevice()[index];
         if (dev == null) return;
         for (Map.Entry<Integer, ArrayList<JFGDPMsg>> entry : rsp.map.entrySet()) {
-
+            SLog.i("dp key: "+entry.getKey());
             if (entry.getKey() == 206) {
                 JFGDPMsg dp = entry.getValue().get(0);
-                int battery = JfgMsgPackUtils.unpack(dp.packValue,Integer.class);
+                int battery = JfgMsgPackUtils.unpack(dp.packValue, Integer.class);
                 SLog.e("cid: " + rsp.identity + " , battery: " + battery);
             }
 
             if (201 != entry.getKey()) continue;
             if (entry.getValue() == null) continue;
             JFGDPMsg dp = entry.getValue().get(0);
-            IntAndString values =JfgMsgPackUtils.unpack(dp.packValue,IntAndString.class);
+            IntAndString values = JfgMsgPackUtils.unpack(dp.packValue, IntAndString.class);
             SLog.i("netType:" + values.intValue + " , netName:" + values.strValue);
             // baseValue
             dev.base = new JFGDevBaseValue(); // 判断base 是否为空。
@@ -264,7 +268,7 @@ public class DevListFragment extends BaseFragment {
             for (JFGDPMsg msg : data.list) {
                 SLog.w("sync dpId:" + msg.id);
                 if (msg.id != 201) continue;  // 此处判断网络类型。
-                IntAndString values = JfgMsgPackUtils.unpack(msg.packValue,IntAndString.class);
+                IntAndString values = JfgMsgPackUtils.unpack(msg.packValue, IntAndString.class);
                 SLog.i("sync int Value:" + values.intValue + " , sync String Value:" + values.strValue);
                 // baseValue
                 if (dev.base == null) {
@@ -285,8 +289,8 @@ public class DevListFragment extends BaseFragment {
 
 
     @Subscribe
-   public void OnHttpDone(JFGMsgHttpResult msg){
-        SLog.e("requestId:"+msg.requestId+ "  ret:"+msg.ret);
+    public void OnHttpDone(JFGMsgHttpResult msg) {
+        SLog.e("requestId:" + msg.requestId + "  ret:" + msg.ret);
 //        if (msg.ret==200){
 //            SLog.i("data: "+msg.result.length);
 //        }
@@ -311,4 +315,19 @@ public class DevListFragment extends BaseFragment {
         EventBus.getDefault().post(new AddDevFragment.ExitFragmentEvent());
     }
 
+
+    @Subscribe()
+    public void onUpdateAccount(JFGAccount ja) {
+        SLog.i(ja.getAccount() + ", photo url :" + ja.getPhotoUrl());
+    }
+
+    private void test() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SystemClock.sleep(300);
+                JfgAppCmd.getInstance().getAccount();
+            }
+        }).start();
+    }
 }

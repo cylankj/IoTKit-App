@@ -102,20 +102,6 @@ public class ChatroomFragment extends BaseFragment {
         }
     }
 
-    public static void main(String[] arrgs) {
-        StringBuilder s = new StringBuilder();
-        for (int i = 0; i < 256; i++) {
-            s.append(String.format("%2s", Integer.toHexString(i)).replace(' ', '0'));
-        }
-        System.out.println(s.toString());
-        byte[] d = s.toString().getBytes();
-        System.out.println(s.toString().getBytes().length);
-        String str = new String(d);
-        System.out.println(str);
-        for (int i = 0; i < str.length(); i += 2) {
-            System.out.printf(Integer.toHexString(Integer.parseInt(str.substring(i, i + 2), 16)) + " , ");
-        }
-    }
 
     @Override
     public void onResume() {
