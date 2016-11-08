@@ -101,7 +101,13 @@
 /*!
  *  消息内容，最大长度为64k
  */
-@property (nonatomic,copy) NSString *msg;
+@property (nonatomic,strong) NSData *msg;
+
+
+/**
+ *  消息发送者
+ */
+@property (nonatomic,copy) NSString *caller;
 
 @end
 
