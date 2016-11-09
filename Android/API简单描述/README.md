@@ -8,6 +8,14 @@
 
   ---
 
+ #3.0.137
+  
+  1.重命名获取云存储URL的API，getCloudUrlByType(int type ,int flag ,String fileName,String belong);
+   第一个参数，查看JfgEnum.JFG_URL类中的定义。第二个flag，代表着服务器存储的位置（国内外）,由服务器下发。第三个fileName是具体的文件名，必须带后缀。
+   第四个belong 为该资源归属哪个设备，如果有就填上设备ID，如果不归属设备，则填空字符串即可。
+
+  2.修复136版本中存在的bug。 
+
  #3.0.136
   
   1.更新用户头像。 (流程：使用updateAccountPortrait 接口更新头像成功后，
