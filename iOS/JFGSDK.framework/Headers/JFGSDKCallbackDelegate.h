@@ -118,6 +118,13 @@
  */
 -(void)jfgDeviceUnBind:(JFGErrorType)errorType;
 
+/**
+ *  设备版本信息
+ *
+ *  @param info 版本信息
+ */
+-(void)jfgDevVersionUpgradInfo:(JFGSDKDeviceVersionInfo *)info;
+
 
 /*!
  *  其他客户端已接听门铃的呼叫

@@ -459,6 +459,18 @@
 
 
 /**
+ *  检测版本升级,用于摄像头或windows客户端, android/ios 有其他升级方法
+ *
+ *  @param cid     设备标示
+ *  @param pid     设备型号ID
+ *  @param version 当前版本号
+ */
++(void)checkDevVersionWithCid:(NSString *)cid
+                          pid:(uint32_t)pid
+                      version:(NSString *)version;
+
+
+/**
  *  获取设备别名
  *
  *  @param cid 设备标示

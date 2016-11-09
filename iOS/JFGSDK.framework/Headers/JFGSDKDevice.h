@@ -37,3 +37,42 @@
 
 
 @end
+
+//VERSION_UPGRADE
+/**
+ *  bool          hasNewpkg;
+ /// null if hasNewpkg is false, else this is a http url which we can directly download a upgrade file.
+ std::string   url;
+ /// new version of this upgrade
+ std::string   version;
+ /// show upgradeTips to user interface
+ std::string   upgradeTips;
+ /// file md5 checksum
+ std::string   md5;
+ */
+
+@interface JFGSDKDeviceVersionInfo : NSObject
+
+@property (nonatomic,assign)BOOL hasNewPkg;
+
+/**
+ *  null if hasNewpkg is false, else this is a http url which we can directly download a upgrade file.
+ */
+@property (nonatomic,copy)NSString *url;
+
+/**
+ *  new version of this upgrade
+ */
+@property (nonatomic,copy)NSString *version;
+
+/**
+ *  show upgradeTips to user interface
+ */
+@property (nonatomic,copy)NSString *upgradeTips;
+
+/**
+ *  file md5 checksum
+ */
+@property (nonatomic,copy)NSString *md5;
+
+@end
