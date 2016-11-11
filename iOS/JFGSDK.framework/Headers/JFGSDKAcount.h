@@ -48,7 +48,7 @@
  */
 @property (nonatomic,copy) NSString *headUrl;
 
-
+@property (nonatomic,assign)int photoVersion;
 
 @end
 
