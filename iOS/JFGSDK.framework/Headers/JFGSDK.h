@@ -149,6 +149,22 @@
 
 
 /**
+ *  同上
+ *
+ *  @param account 同上
+ *  @param keyword 同上
+ *  @param cerType 开发版（bundleID.Dev）或生产版(bundleID)证书标示
+ *
+ *  @return
+ */
++(JFGErrorType)userLogin:(NSString *)account
+                 keyword:(NSString *)keyword
+                     vid:(NSString *)vid
+                    vkey:(NSString *)vkey
+                 cerType:(NSString *)cerType;
+
+
+/**
  *  Logined session
  *
  *  @return session
