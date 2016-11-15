@@ -166,7 +166,14 @@ public class InputWifiCfgFragment extends BaseFragment {
                 SLog.i("bind code : " + md5str);
                 JFGAppliction.bindBean = bean;
                 // set dev wifi config
-                cmd.setWifiCfg(JfgConstants.IP, bean.cid, bean.mac, ssid, pwd);
+                if (bean.devNetType == 0) {
+                    // wifi cam or door bell
+                    cmd.setWifiCfg(JfgConstants.IP, bean.cid, bean.mac, ssid, pwd);
+                } else if (bean.devNetType == 2) {
+                    // 3G or 4g cam
+                    cmd.setWifiCfg(JfgConstants.IP, bean.cid, bean.mac, "", "");
+                }
+
             }
         });
     }

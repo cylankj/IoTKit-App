@@ -40,4 +40,7 @@ public class BindDevBean implements Serializable {
      */
     public String bindCode;
 
+
+    public int devNetType;
+
 }

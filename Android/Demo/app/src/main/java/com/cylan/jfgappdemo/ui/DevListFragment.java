@@ -127,7 +127,7 @@ public class DevListFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        test();
+//        test();
     }
 
     @Override
@@ -205,15 +205,17 @@ public class DevListFragment extends BaseFragment {
         JFGDevice dev = adapter.getDevice()[index];
         if (dev == null) return;
         for (Map.Entry<Integer, ArrayList<JFGDPMsg>> entry : rsp.map.entrySet()) {
-            SLog.d("dp key: "+entry.getKey());
+            SLog.d("dp key: " + entry.getKey());
             if (entry.getKey() == 206) {
+                if (entry.getValue().isEmpty()) continue;
                 JFGDPMsg dp = entry.getValue().get(0);
                 int battery = JfgMsgPackUtils.unpack(dp.packValue, Integer.class);
                 SLog.i("cid: " + rsp.identity + " , battery: " + battery);
+
             }
 
             if (201 != entry.getKey()) continue;
-            if (entry.getValue() == null) continue;
+            if (entry.getValue() == null || entry.getValue().isEmpty()) continue;
             JFGDPMsg dp = entry.getValue().get(0);
             IntAndString values = JfgMsgPackUtils.unpack(dp.packValue, IntAndString.class);
             SLog.i("netType:" + values.intValue + " , netName:" + values.strValue);
