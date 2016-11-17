@@ -20,7 +20,7 @@
 
 ####5.找到Build Settings，把Enable Bitcode设置为NO
 
-####6.设置SDK服务器地址（默认robot.jfgou.com）
+####6.设置SDK服务器地址（默认robot.jfgou.com）(注意：新版Key修改为：Jfgsdk_host)
 ![lib list](http://7xsvxe.com1.z0.glb.clouddn.com/C2B98658-8AEE-49A2-ABB3-1423B37C6607.png)
 
 ##iOS APP开发-2初始化
