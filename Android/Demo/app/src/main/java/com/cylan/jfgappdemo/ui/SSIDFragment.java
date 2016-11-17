@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
+import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
@@ -266,6 +267,10 @@ public class SSIDFragment extends BaseFragment {
         if (TextUtils.equals(heard.cmd, JfgConstants.ping_ack)) {
             // ping ack
             JfgUdpMsg.PingAck pingAck = pack.read(msg.data, JfgUdpMsg.PingAck.class);
+            if (pingAck.net == 2) {
+                // this devices has mobile network. 3G or 4G
+                bindDevBean.devNetType = pingAck.net;
+            }
             SLog.i(pingAck.cid);
             SLog.e("Send Fping");
             scaner.removeMessages(3);
@@ -274,7 +279,7 @@ public class SSIDFragment extends BaseFragment {
             scaner.sendEmptyMessageDelayed(3, 1000);
         } else if (TextUtils.equals(heard.cmd, JfgConstants.f_ping_ack)) {
             JfgUdpMsg.FPingAck fpingAck = pack.read(msg.data, JfgUdpMsg.FPingAck.class);
-            SLog.i("cid: %s, mac: %s, version: %s",fpingAck.cid,fpingAck.mac,fpingAck.version);
+            SLog.i("cid: %s, mac: %s, version: %s", fpingAck.cid, fpingAck.mac, fpingAck.version);
             if (!TextUtils.equals(fpingAck.cid, bindDevBean.cid)) {
                 scaner.sendEmptyMessageDelayed(4, 1000);
                 return;
@@ -289,7 +294,6 @@ public class SSIDFragment extends BaseFragment {
             bundle.putSerializable("bindDevBean", bindDevBean);
             ArrayList<ScanResult> results = JfgNetUtils.getInstance(getContext()).getScanResult();
             bundle.putParcelableArrayList("list", results);
-
             InputWifiCfgFragment fragment = InputWifiCfgFragment
                     .getInstance(bundle);
             getFragmentManager().beginTransaction()

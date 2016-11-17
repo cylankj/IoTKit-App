@@ -256,4 +256,9 @@ public class AppDemoCallBack implements AppCallBack {
     public void OnGetFeedbackRsp(int ret, ArrayList<JFGFeedbackInfo> list) {
         SLog.d("");
     }
+
+    @Override
+    public void OnCheckDevVersionRsp(boolean hasNew, String url, String version, String tip, String md5) {
+        SLog.d("");
+    }
 }

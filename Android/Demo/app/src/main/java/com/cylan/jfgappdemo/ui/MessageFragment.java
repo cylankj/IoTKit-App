@@ -22,13 +22,13 @@ import com.cylan.jfgappdemo.adapter.MessageAdapter;
 import com.cylan.jfgappdemo.databinding.FragmentMessageBinding;
 import com.cylan.jfgappdemo.datamodel.MessageBean;
 import com.cylan.jfgappdemo.datamodel.MsgWarningInfo;
+import com.cylan.utils.JfgMsgPackUtils;
 import com.cylan.utils.JfgUtils;
 import com.superlog.SLog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.msgpack.MessagePack;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -96,11 +96,10 @@ public class MessageFragment extends BaseFragment {
 
     private void addMessageBean(RobotoGetDataRsp rsp, ArrayList<JFGDPMsg> msgs) throws IOException {
         int len = msgs.size();
-        MessagePack pack = new MessagePack();
         for (int j = 0; j < len; j++) {
             JFGDPMsg dp = msgs.get(j);
             if (dp.id != 505) continue;
-            MsgWarningInfo info = pack.read(dp.packValue, MsgWarningInfo.class);
+            MsgWarningInfo info = JfgMsgPackUtils.unpack(dp.packValue, MsgWarningInfo.class);
             MessageBean bean = getMessageBean(info, rsp.identity);
             bean.version = dp.version;
             if (list.contains(bean)) continue;
@@ -118,6 +117,7 @@ public class MessageFragment extends BaseFragment {
                 String file = info.time + "_" + (i + 1) + ".jpg";
                 // 获取报警图片URL
                 String url = JfgAppCmd.getInstance().getCloudUrlByType(JfgEnum.JFG_URL.WARNING,info.type,file,identity);
+//                SLog.i(url);
                 urls.add(url);  // add url ;
             }
         }
