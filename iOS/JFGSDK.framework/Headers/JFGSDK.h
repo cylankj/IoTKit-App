@@ -79,7 +79,7 @@
  *
  *  @param deviceToken deviceToken
  */
-+(void)uploadDeviceToken:(NSString *)deviceToken;
++(void)deviceTokenUpload:(NSData *)deviceToken;
 
 #pragma mark - 登录与注册 Login and register
 /*!
@@ -200,6 +200,14 @@
                accessToken:(NSString *)accToken
                        vid:(NSString *)vid
                       vkey:(NSString *)vkey;
+
+
+
++(void)openLoginWithOpenId:(NSString *)openId
+               accessToken:(NSString *)accToken
+                       vid:(NSString *)vid
+                      vkey:(NSString *)vkey
+                   cerType:(NSString *)cerType;
 
 
 /*!
