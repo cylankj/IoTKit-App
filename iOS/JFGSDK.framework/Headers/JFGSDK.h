@@ -81,6 +81,9 @@
  */
 +(void)deviceTokenUpload:(NSData *)deviceToken;
 
+
++(void)deviceTokenUploadForString:(NSString *)deviceToken;
+
 #pragma mark - 登录与注册 Login and register
 /*!
  *  用户注册

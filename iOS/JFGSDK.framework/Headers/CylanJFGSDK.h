@@ -24,4 +24,6 @@
 +(void)getHistoryVideoListForCid:(NSString *)cid;
 +(BOOL)setAudio:(BOOL)local openMic:(BOOL)openMic openSpeaker:(BOOL)openSpeaker;
 
+
+
 @end
