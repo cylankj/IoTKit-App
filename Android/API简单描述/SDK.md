@@ -44,7 +44,7 @@
 ```
 
 6.初始化API ,注意添加sd卡的读写权限。最后一个参数为日志存放日志的路径。
-方便以后查找问题，请在此路径下提取SmartCall_t.txt文件。
+方便以后查找问题，请在此路径下提取smartCall_t.txt文件。
 ```java
      File dir = Environment.getExternalStorageDirectory();
         File file = new File(dir, "/JfgAppDemo");
@@ -58,6 +58,12 @@
             e.printStackTrace();
         }
 ```
+  注：1.如果普通问题需要协助的，请提供smartCall_t.txt 日志。并告知大概时间节点。
+     如果是必现的问题，可以将此文件删除后重新运行程序，再提供此日志，可以排除其他干扰，便于定位。
+     2.如果发生奔溃，请抓取一段logcat日志,如在linux终端中执行：adb logcat DEBUG *:I *:S >> crash.log 。并提供smartCall_t.txt 日志。
+      carsh.log 文件中必须抓取到堆栈信息，如图：
+      ![](assets/crash.png)
+
  7.至此SDK接入已完成，接下来可以使用其他API。
  如： 注册，登录，添加设备，查看视频等等功能。
 
