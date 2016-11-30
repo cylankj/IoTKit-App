@@ -115,8 +115,9 @@
                 android:layout_marginStart="8dp"
                 android:button="@null"
                 android:checked="true"
+                android:textAllCaps="false"
                 android:enabled="false"
-                android:textOff="Realtime"
+                android:textOff="Live"
                 android:textOn="History"
                 android:textSize="14sp" />
 

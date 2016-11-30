@@ -87,6 +87,27 @@ public class JfgEvent {
          */
         public static final int JFG_RESULT_SET_FRIEND_MARKNAME = 8;
 
+        /**
+         * 分享设备
+         */
+        public static final int JFG_RESULT_SHARE_DEVICE = 9;
+        /**
+         * 取消分享
+         */
+        public static final int JFG_RESULT_UNSHARE_DEVICE = 10;
+        /**
+         * 设置别名
+         */
+        public static final int JFG_RESULT_SET_DEVICE_ALIAS = 11;
+        /**
+         * 发送反馈的结果
+         */
+        public static final int JFG_RESULT_SEND_FEEDBACK = 12;
+        /**
+         * 设置DeviceToken的返回结果
+         */
+        public static final int JFG_RESULT_SET_DEVICE_TOKEN = 13;
+
 
         //------------------------------------------------------------------------
 

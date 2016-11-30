@@ -141,7 +141,7 @@ public class AppDemoCallBack implements AppCallBack {
 
     @Override
     public void OnRobotGetDataTimeout(long seq) {
-        SLog.d("time out:"+seq);
+        SLog.d("time out:" + seq);
     }
 
     @Override
@@ -152,7 +152,7 @@ public class AppDemoCallBack implements AppCallBack {
 
     @Override
     public void OnlineStatus(boolean online) {
-        SLog.d(""+online);
+        SLog.d("" + online);
         EventBus.getDefault().post(new JfgEvent.OnLineState(online));
     }
 
@@ -233,8 +233,8 @@ public class AppDemoCallBack implements AppCallBack {
     }
 
     @Override
-    public void OnUpdateNTP(long unixTimestamp) {
-        SLog.d("unixTimestamp : " + JfgUtils.DetailedDateFormat.format(unixTimestamp * 1000));
+    public void OnUpdateNTP(int unixTimestamp) {
+        SLog.d("unixTimestamp : " + JfgUtils.DetailedDateFormat.format(unixTimestamp * 1000L));
     }
 
     @Override

@@ -262,8 +262,6 @@ public class PlayFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (realTime) {
-//                    showToast("Now is RealTime video model,plaese select history video model after click this Item!");
-                    // select history
                     binding.tbVideo.setChecked(false);
                     return;
                 }
@@ -273,13 +271,12 @@ public class PlayFragment extends BaseFragment {
                 }
             }
         });
+
         binding.tbVideo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 SLog.i("isChecked?" + isChecked);
                 realTime = isChecked;
-//                stopPlay();
-//                playVideo();
                 JfgAppCmd.getInstance().switchVideoMode(realTime, curreHistoryTime);
             }
         });

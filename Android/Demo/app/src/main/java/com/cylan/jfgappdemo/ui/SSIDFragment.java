@@ -273,10 +273,9 @@ public class SSIDFragment extends BaseFragment {
             }
             SLog.i(pingAck.cid);
             SLog.e("Send Fping");
-            scaner.removeMessages(3);
-            scaner.sendEmptyMessage(4); // fping
+            scaner.removeCallbacksAndMessages(null);
+            scaner.sendEmptyMessageDelayed(4, 200);
             bindDevBean.cid = pingAck.cid;
-            scaner.sendEmptyMessageDelayed(3, 1000);
         } else if (TextUtils.equals(heard.cmd, JfgConstants.f_ping_ack)) {
             JfgUdpMsg.FPingAck fpingAck = pack.read(msg.data, JfgUdpMsg.FPingAck.class);
             SLog.i("cid: %s, mac: %s, version: %s", fpingAck.cid, fpingAck.mac, fpingAck.version);

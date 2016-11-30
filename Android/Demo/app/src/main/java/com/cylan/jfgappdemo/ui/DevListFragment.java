@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.util.TimeUtils;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.cylan.jfgappdemo.databinding.FragmentDevListBinding;
 import com.cylan.jfgappdemo.datamodel.BindDevBean;
 import com.cylan.jfgappdemo.datamodel.IntAndString;
 import com.cylan.jfgappdemo.datamodel.StringAndInt;
+import com.cylan.udpMsgPack.JfgUdpMsg;
 import com.cylan.utils.JfgMsgPackUtils;
 import com.superlog.SLog;
 
@@ -38,9 +40,11 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by lxh on 16-7-23.
@@ -185,7 +189,6 @@ public class DevListFragment extends BaseFragment {
         ArrayList<JFGDPMsg> dp = new ArrayList<>();
         dp.add(new JFGDPMsg(201, 0));// query dev network
         dp.add(new JFGDPMsg(206, 0));// query dev battery
-        dp.add(new JFGDPMsg(509, 0));
         long seq = JfgAppCmd.getInstance().robotGetData(peer, dp, 1, false, 0);
         SLog.i(peer + " seq:" + seq);
     }
@@ -327,8 +330,7 @@ public class DevListFragment extends BaseFragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(300);
-                JfgAppCmd.getInstance().getAccount();
+
             }
         }).start();
     }

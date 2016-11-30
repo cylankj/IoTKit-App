@@ -88,7 +88,7 @@ public class MessageFragment extends BaseFragment {
 
     private void getMessage(long version, boolean ase) {
         ArrayList<JFGDPMsg> dps = new ArrayList<>();
-        dps.add(new JFGDPMsg(505, version));
+        dps.add(new JFGDPMsg(505, version)); // 获取某一个时间点的报警图片
         JfgAppCmd.getInstance().robotGetData(device.uuid, dps, 10, ase, 0);
         SLog.i("getMessage: " + version);
     }
@@ -139,7 +139,8 @@ public class MessageFragment extends BaseFragment {
                 int last = ((LinearLayoutManager) manager).findLastVisibleItemPosition();
                 if (last != manager.getItemCount() - 1) return;
                 if (list.size() != 0) {
-                    getMessage(list.get(last).time, true);
+                    long version = list.get(last).version;
+                    getMessage(version, true); // 传入最好一天记录的版本号
                 }
             }
 
