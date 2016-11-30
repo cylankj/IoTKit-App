@@ -5,7 +5,7 @@
 //  Created by yangli on 16/8/11.
 //  Copyright © 2016年 yangli. All rights reserved.
 //
-#define JFGSDKVersion @"3.0.7"
+#define JFGSDKVersion @"3.0.9"
 
 /**
  
@@ -36,4 +36,12 @@
  2.删除JFGSDKPlayVideo类，使用JFGSDKVideoView替换
  3.添加配置sdk服务器地址功能
  
+ 3.0.8
+ 1.去除http get操作
+ 
+ 
+ 3.0.9
+ 1.完善apns推送接口
+ 2.增加包含cerType参数的登录接口（cerType:apns推送环境证书标示）
+ 3.修改服务器地址key：Jfgsdk host --> Jfgsdk_host
  */
