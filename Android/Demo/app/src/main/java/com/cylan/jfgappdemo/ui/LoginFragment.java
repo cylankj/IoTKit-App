@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.cylan.constants.JfgConstants;
 import com.cylan.entity.jniCall.JFGResult;
+import com.cylan.ex.JfgException;
 import com.cylan.jfgapp.jni.JfgAppCmd;
 import com.cylan.jfgappdemo.JfgEvent;
 import com.cylan.jfgappdemo.R;
@@ -84,7 +85,11 @@ public class LoginFragment extends BaseFragment {
                 String userName = binding.etUserName.getText().toString().trim();
                 Toast.makeText(getContext(), "login: " + userName, Toast.LENGTH_SHORT).show();
                 SLog.i("name:%s,pwd:%s", userName, pwd);
-                JfgAppCmd.getInstance().login(userName, pwd);
+                try {
+                    JfgAppCmd.getInstance().login(userName, pwd);
+                } catch (JfgException e) {
+                    e.printStackTrace();
+                }
 //                JfgAppCmd.getInstance().openLogin("testOpenLogin", "http://yf.cylan.com.cn");
             }
         });
